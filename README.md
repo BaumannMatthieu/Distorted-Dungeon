@@ -1,8 +1,8 @@
 # Distorted-Dungeon
 3D rogue like/platformer game in development
 
-## What's been done ?
-  The dungeon is generated procedurally using Kruskal's algorithm to find computing the minimum spanning tree of a graph composed of rooms as nodes. Edges give the corridors between rooms.
+## What's been done for the moment ?
+  The dungeon is generated procedurally using Kruskal's algorithm to find the minimum spanning tree of a graph composed of rooms as nodes. Edges give the corridors between rooms.
   
   Game uses OpenGL v3.3/GLSL and is based on a Entity component system design pattern.
   Components that currently compose the game are :
