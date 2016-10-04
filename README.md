@@ -14,6 +14,7 @@
   * Motion (declined in different pattern of motion like circular, A -> B etc...
   * Effect : all entitys that produces effects when we interact with it 
 
-##Commands : 
+##Commands : (for azerty keybords) 
  * R : jump
  * A : Equip (.resp Remove) your axe (.resp from your hand).
+ * ZQSD : Displacement
