@@ -1,0 +1,12 @@
+#version 400
+
+uniform sampler2D texSampler;
+
+in vec2 out_texcoords;
+in vec4 out_color;
+
+out vec4 col;
+ 
+void main(void) {
+    col = texture2D(texSampler, out_texcoords);
+}
