@@ -11,17 +11,18 @@ out vec4 c;
 out vec2 tx;
 out vec3 V;
 out vec3 N;
-out vec3 C;
+out vec3 E;
 
 uniform mat4 model, view, projection;
-uniform mat3 inv_model = mat3(1.0);
+uniform mat4 inv_model = mat4(1.0);
 
 void main(void) {
     gl_Position = projection*view*model*vec4(in_position, 1.0);
  
     c = in_color;
     tx = in_texcoord;
-    V = vec3(model*vec4(in_position, 1.0));
-    C = - vec3( view[3] ) * mat3( view );
-    N = normalize(in_normal);
+
+    V = vec3(model * vec4(in_position, 1.f));
+    E = -vec3( view[3] ) * mat3( view );
+    N = normalize(vec3(inv_model * vec4(in_normal, 0.f)));
 }

@@ -1,4 +1,4 @@
-# Install script for directory: /home/matthieu/Programmation/cc
+# Install script for directory: /home/matthieu/Programmation/Distorted-Dungeon
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/matthieu/Programmation/cc/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/matthieu/Programmation/Distorted-Dungeon/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

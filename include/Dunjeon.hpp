@@ -231,9 +231,8 @@ class Dungeon {
 					EntityPtr entity = std::make_shared<Entity>();
 
 					RenderablePtr<Plane> floor = std::make_shared<Renderable<Plane>>(textured, "stone");
-					glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
-					floor->scaleLocalMatrix(m_rooms[k].getSize()*scale);
-					floor->translateLocalMatrix(m_rooms[k].getCenter()*scale);
+					floor->scaleLocalMatrix(glm::vec3(m_rooms[k].getSize().x, 0.f, m_rooms[k].getSize().z));
+					floor->translateLocalMatrix(glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z));
 
 					floor->scaleTexCoords(glm::vec2(m_rooms[k].getSize().x, m_rooms[k].getSize().z));
 
@@ -283,11 +282,11 @@ class Dungeon {
 				unsigned int k = edges[i].first;
 				unsigned int v = edges[i].second;
 
-				glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
+				//glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
 
 				RenderablePtr<Line> line = std::make_shared<Renderable<Line>>(basic,
-																			 m_rooms[k].getCenter()*scale,
-																			 m_rooms[v].getCenter()*scale,
+																			 glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z),
+																			 glm::vec3(m_rooms[v].getCenter().x, 0.f, m_rooms[v].getCenter().z),
 																			 glm::vec4(1.f, 0.f, 0.f, 1.f),
 																			 glm::vec4(1.f, 0.f, 0.f, 1.f));
 
@@ -407,12 +406,11 @@ class Dungeon {
 				EntityPtr entity = std::make_shared<Entity>();
 
 				RenderablePtr<Plane> tile = std::make_shared<Renderable<Plane>>(textured, "stone");
-				glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
+				//glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
 				glm::vec3 translate(tiles_corridors[j].first, 0.f, tiles_corridors[j].second);
 				
-				tile->scaleLocalMatrix(scale);
-				tile->translateLocalMatrix(0.5f*scale);
-				tile->translateLocalMatrix(translate*scale);
+				tile->translateLocalMatrix(glm::vec3(0.5f, 0.f, 0.5f));
+				tile->translateLocalMatrix(translate);
 
 				RenderableComponentPtr renderable_component = std::make_shared<RenderableComponent>();
 				renderable_component->m_renderable = tile;
@@ -434,11 +432,11 @@ class Dungeon {
 			for(unsigned int j = 0; j < corridors.size(); ++j) {
 				EntityPtr entity = std::make_shared<Entity>();
 				
-				glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
+				//glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
 
 				RenderablePtr<Line> line = std::make_shared<Renderable<Line>>(basic,
-																			 glm::vec3(corridors[j].first.x, 0.f, corridors[j].first.y)*scale,
-																			 glm::vec3(corridors[j].second.x, 0.f, corridors[j].second.y)*scale,
+																			 glm::vec3(corridors[j].first.x, 0.f, corridors[j].first.y),
+																			 glm::vec3(corridors[j].second.x, 0.f, corridors[j].second.y),
 																			 glm::vec4(0.f, 0.f, 1.f, 1.f),
 																			 glm::vec4(0.f, 0.f, 1.f, 1.f));
 
@@ -464,13 +462,13 @@ class Dungeon {
 						EntityPtr entity = std::make_shared<Entity>();
 
 						RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-						glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+						glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 						glm::vec3 translate(x, 0.f, position.y);
 						
 						wall->scaleLocalMatrix(scale);
 						wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
-						wall->translateLocalMatrix(glm::vec3(SIZE_TILE*0.5f, HEIGHT_WALL*SIZE_TILE*0.5f, 0.f));
-						wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+						wall->translateLocalMatrix(glm::vec3(0.5f, HEIGHT_WALL*0.5f, 0.f));
+						wall->translateLocalMatrix(translate);
 
 						wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 
@@ -501,13 +499,13 @@ class Dungeon {
 						EntityPtr entity = std::make_shared<Entity>();
 
 						RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-						glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+						glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 						glm::vec3 translate(x, 0.f, position.y + size.y);
 						
 						wall->scaleLocalMatrix(scale);
 						wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
-						wall->translateLocalMatrix(glm::vec3(SIZE_TILE*0.5f, HEIGHT_WALL*SIZE_TILE*0.5f, 0.f));
-						wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+						wall->translateLocalMatrix(glm::vec3(0.5f, HEIGHT_WALL*0.5f, 0.f));
+						wall->translateLocalMatrix(translate);
 
 						wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 
@@ -540,14 +538,14 @@ class Dungeon {
 						EntityPtr entity = std::make_shared<Entity>();
 
 						RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-						glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+						glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 						glm::vec3 translate(position.x + size.x, 0.f, y);
 						
 						wall->scaleLocalMatrix(scale);
 						wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
 						wall->rotateLocalMatrix(90, glm::vec3(0, 1, 0));
-						wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*SIZE_TILE*0.5f, SIZE_TILE*0.5f));
-						wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+						wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*0.5f, 0.5f));
+						wall->translateLocalMatrix(translate);
 
 						wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 
@@ -580,14 +578,14 @@ class Dungeon {
 						EntityPtr entity = std::make_shared<Entity>();
 
 						RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-						glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+						glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 						glm::vec3 translate(position.x, 0.f, y);
 						
 						wall->scaleLocalMatrix(scale);
 						wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
 						wall->rotateLocalMatrix(90, glm::vec3(0, 1, 0));
-						wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*SIZE_TILE*0.5f, SIZE_TILE*0.5f));
-						wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+						wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*0.5f, 0.5f));
+						wall->translateLocalMatrix(translate);
 
 						wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 
@@ -621,13 +619,13 @@ class Dungeon {
 					EntityPtr entity = std::make_shared<Entity>();
 
 					RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-					glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+					glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 					glm::vec3 translate(tile.first, 0.f, tile.second);
 					
 					wall->scaleLocalMatrix(scale);
 					wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
-					wall->translateLocalMatrix(glm::vec3(SIZE_TILE*0.5f, HEIGHT_WALL*SIZE_TILE*0.5f, 0.f));
-					wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+					wall->translateLocalMatrix(glm::vec3(0.5f, HEIGHT_WALL*0.5f, 0.f));
+					wall->translateLocalMatrix(translate);
 
 					wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 
@@ -659,13 +657,13 @@ class Dungeon {
 					EntityPtr entity = std::make_shared<Entity>();
 
 					RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-					glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+					glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 					glm::vec3 translate(tile.first, 0.f, tile.second + 1);
 					
 					wall->scaleLocalMatrix(scale);
 					wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
-					wall->translateLocalMatrix(glm::vec3(SIZE_TILE*0.5f, HEIGHT_WALL*SIZE_TILE*0.5f, 0.f));
-					wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+					wall->translateLocalMatrix(glm::vec3(0.5f, HEIGHT_WALL*0.5f, 0.f));
+					wall->translateLocalMatrix(translate);
 
 					wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 
@@ -696,14 +694,14 @@ class Dungeon {
 					EntityPtr entity = std::make_shared<Entity>();
 
 					RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-					glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+					glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 					glm::vec3 translate(tile.first + 1, 0.f, tile.second);
 					
 					wall->scaleLocalMatrix(scale);
 					wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
 					wall->rotateLocalMatrix(90, glm::vec3(0, 1, 0));
-					wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*SIZE_TILE*0.5f, SIZE_TILE*0.5f));
-					wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+					wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*0.5f, 0.5f));
+					wall->translateLocalMatrix(translate);
 
 					wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 
@@ -734,14 +732,14 @@ class Dungeon {
 					EntityPtr entity = std::make_shared<Entity>();
 
 					RenderablePtr<Plane> wall = std::make_shared<Renderable<Plane>>(textured, "wall");
-					glm::vec3 scale(SIZE_TILE, 0.f, HEIGHT_WALL*SIZE_TILE);
+					glm::vec3 scale(1.0f, 0.f, HEIGHT_WALL);
 					glm::vec3 translate(tile.first, 0.f, tile.second);
 					
 					wall->scaleLocalMatrix(scale);
 					wall->rotateLocalMatrix(90, glm::vec3(1, 0, 0));
 					wall->rotateLocalMatrix(90, glm::vec3(0, 1, 0));
-					wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*SIZE_TILE*0.5f, SIZE_TILE*0.5f));
-					wall->translateLocalMatrix(translate*glm::vec3(SIZE_TILE, 0.f, SIZE_TILE));
+					wall->translateLocalMatrix(glm::vec3(0.f, HEIGHT_WALL*0.5f, 0.5f));
+					wall->translateLocalMatrix(translate);
 
 					wall->scaleTexCoords(glm::vec2(1.0f, HEIGHT_WALL));
 

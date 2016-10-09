@@ -1,23 +1,23 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp
+Change Dir: /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec3867480033/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec3867480033.dir/build.make CMakeFiles/cmTryCompileExec3867480033.dir/build
-make[1]: entrant dans le répertoire « /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp »
-/usr/bin/cmake -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec3867480033.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3867480033.dir/CheckSymbolExists.c.o   -c /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTryCompileExec3867480033
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3867480033.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTryCompileExec3867480033.dir/CheckSymbolExists.c.o  -o cmTryCompileExec3867480033 -rdynamic 
-CMakeFiles/cmTryCompileExec3867480033.dir/CheckSymbolExists.c.o: dans la fonction « main »:
+Run Build Command:"/usr/bin/make" "cmTryCompileExec3278360035/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec3278360035.dir/build.make CMakeFiles/cmTryCompileExec3278360035.dir/build
+make[1]: entrant dans le répertoire « /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3278360035.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec3278360035.dir/CheckSymbolExists.c.o   -c /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTryCompileExec3278360035
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3278360035.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec3278360035.dir/CheckSymbolExists.c.o  -o cmTryCompileExec3278360035 -rdynamic 
+CMakeFiles/cmTryCompileExec3278360035.dir/CheckSymbolExists.c.o: dans la fonction « main »:
 CheckSymbolExists.c:(.text+0x16): référence indéfinie vers « pthread_create »
 collect2: error: ld returned 1 exit status
-make[1]: *** [cmTryCompileExec3867480033] Erreur 1
-make[1]: quittant le répertoire « /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp »
-make: *** [cmTryCompileExec3867480033/fast] Erreur 2
+make[1]: *** [cmTryCompileExec3278360035] Erreur 1
+make[1]: quittant le répertoire « /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp »
+make: *** [cmTryCompileExec3278360035/fast] Erreur 2
 
-File /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
@@ -33,21 +33,21 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp
+Change Dir: /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTryCompileExec838004007/fast"
-/usr/bin/make -f CMakeFiles/cmTryCompileExec838004007.dir/build.make CMakeFiles/cmTryCompileExec838004007.dir/build
-make[1]: entrant dans le répertoire « /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp »
-/usr/bin/cmake -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp/CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec838004007.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec838004007.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.2/Modules/CheckFunctionExists.c
-Linking C executable cmTryCompileExec838004007
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec838004007.dir/link.txt --verbose=1
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec838004007.dir/CheckFunctionExists.c.o  -o cmTryCompileExec838004007 -rdynamic -lpthreads 
+Run Build Command:"/usr/bin/make" "cmTryCompileExec316192835/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec316192835.dir/build.make CMakeFiles/cmTryCompileExec316192835.dir/build
+make[1]: entrant dans le répertoire « /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec316192835.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec316192835.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.2/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec316192835
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec316192835.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec316192835.dir/CheckFunctionExists.c.o  -o cmTryCompileExec316192835 -rdynamic -lpthreads 
 /usr/bin/ld: ne peut trouver -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [cmTryCompileExec838004007] Erreur 1
-make[1]: quittant le répertoire « /home/matthieu/Programmation/cc/build/CMakeFiles/CMakeTmp »
-make: *** [cmTryCompileExec838004007/fast] Erreur 2
+make[1]: *** [cmTryCompileExec316192835] Erreur 1
+make[1]: quittant le répertoire « /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/CMakeTmp »
+make: *** [cmTryCompileExec316192835/fast] Erreur 2
 
 

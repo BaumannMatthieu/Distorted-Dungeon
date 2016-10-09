@@ -52,6 +52,7 @@ CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/EntityManager.h
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/LineRenderable.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/MagicSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/MeshOBJRenderable.hpp
+CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/MotionSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/MovableComponent.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Physicable.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/PlaneRenderable.hpp

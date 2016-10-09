@@ -67,8 +67,14 @@ class Collided {
 
 									movable->m_position += delta;
 									box_entity->m_position += delta;
-									glm::vec3 unitWorld(SIZE_TILE, SIZE_TILE, SIZE_TILE);
-									box_entity->m_box->translateHeritanceMatrix(delta*unitWorld);
+
+									box_entity->m_box->translateLocalMatrix(delta);
+									movable->m_heritance = glm::translate(movable->m_heritance, delta*glm::vec3(SIZE_TILE));
+
+									RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
+									if(renderable != nullptr) {
+										renderable->m_renderable->setHeritanceMatrix(movable->m_heritance * glm::toMat4(movable->m_quat));
+									}
 								}
 							}
 

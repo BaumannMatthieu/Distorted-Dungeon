@@ -10,6 +10,7 @@
 
 #include "../include/MovableComponent.hpp"
 #include "../include/CollisableComponent.hpp"
+#include "../include/MotionSystem.hpp"
 
 struct Carried : public Component {
 	EntityPtr						m_entity;
@@ -103,35 +104,38 @@ class Interaction {
 
 				if(weapon_equiped && weapon != nullptr) {
 					MovablePtr movable = m_player->getComponent<Movable>();
-
-					CollisablePtr<Cobble> collisable = std::make_shared<Collisable<Cobble>>();
-					collisable->m_position = glm::vec3(-0.1f, -0.3f, 0.1f);
-					collisable->m_size = glm::vec3(0.3f, 0.1f, 0.1f);
-					collisable->m_box = std::make_shared<Renderable<Box>>(shaders.get("wireframe"),
-																		  collisable->m_position,
-																		  collisable->m_size,
-																		  glm::vec4(1.f, 1.f, 0.f, 1.f));
 					CollisablePtr<Cobble> player_collisable = m_player->getComponent<Collisable<Cobble>>();
-					collisable->m_box->setParent(player_collisable->m_box);
-
-					RenderablePtr<MeshOBJ> axe_mesh = std::make_shared<Renderable<MeshOBJ>>(shaders.get("textured"), "axe", "layout axe");
-					RenderableComponentPtr render = std::make_shared<RenderableComponent>();
-					render->m_renderable = axe_mesh;
-					axe_mesh->setParent(player_collisable->m_box);
-					glm::vec3 unitWorld(SIZE_TILE, SIZE_TILE, SIZE_TILE);
-					axe_mesh->scaleLocalMatrix(glm::vec3(2.0f, 2.0f, 2.0f));
-					//axe_mesh->rotateLocalMatrix(90.f, glm::vec3(0.0f, 0.0f, -1.0f));
-					axe_mesh->rotateLocalMatrix(180.f, glm::vec3(0.0f, 1.0f, 0.0f));
-					axe_mesh->translateLocalMatrix(glm::vec3(0.3f, 0.f, 0.15f)*unitWorld);
-					//axe_mesh->scaleTexCoords(glm::vec2(2.0f, 2.0f));
-					weapon->addComponent<RenderableComponent>(render);
-
-					weapon->addComponent<Collisable<Cobble>>(collisable);
+					
 					weapon->addComponent<Equipped>(std::make_shared<Equipped>());
 				} else if(!weapon_equiped && weapon != nullptr) {
-					weapon->deleteComponent<Collisable<Cobble>>();
 					weapon->deleteComponent<Equipped>();
-					weapon->deleteComponent<RenderableComponent>();
+				}
+			}
+
+			if(keystate[SDL_SCANCODE_0]) {
+				ContainerPtr container = m_player->getComponent<Container>();
+				EntityPtr weapon = nullptr;
+
+				for(auto& carried : container->m_entitys) {
+					CarriedPtr object = carried->getComponent<Carried>();
+					EquippedPtr equipped = carried->getComponent<Equipped>();
+					if(object->m_type == Carried::WEAPON/* && equipped != nullptr*/) {
+						weapon = carried;
+						break;
+					}
+				}
+
+				if(weapon != nullptr && weapon->getComponent<Motion<Rotation>>() == nullptr) {
+					MotionPtr<Rotation> motion = std::make_shared<Motion<Rotation>>();
+					motion->m_alpha = glm::quat(1.f, 0.f, 0.f, 0.f);
+					motion->m_beta = glm::quat(glm::cos(3.14f/4.f), 0.f, 0.f, glm::sin(3.14f/4.f));
+
+					motion->m_time_start = SDL_GetTicks();
+					motion->m_duration = 200;
+					RenderableComponentPtr render = weapon->getComponent<RenderableComponent>();
+					motion->m_heritance = render->m_renderable->getHeritanceMatrix();
+
+					weapon->addComponent<Motion<Rotation>>(motion);
 				}
 			}
 		}

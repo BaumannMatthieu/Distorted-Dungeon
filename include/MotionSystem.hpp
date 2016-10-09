@@ -26,13 +26,13 @@ struct Instant {
 
 // Rotation between alpha and beta
 struct Rotation {
-	float 		m_alpha;
-	float 		m_beta;
+	glm::quat		m_alpha;
+	glm::quat		m_beta;
 
-	glm::vec3	m_axis;
+	unsigned int    m_time_start;
+	unsigned int    m_duration;
 
-	bool		m_alpha_to_beta;
-	float		m_angle;
+	glm::mat4		m_heritance;
 };
 
 template<typename Type>
@@ -74,12 +74,43 @@ class MotionManager {
 
 				MotionPtr<Rotation> motion_rotate = entity->getComponent<Motion<Rotation>>();
 				if(motion_rotate != nullptr) {
-					if(motion_rotate->m_alpha_to_beta) {
-						
-					} else {
+					float t = static_cast<float>((SDL_GetTicks() - motion_rotate->m_time_start))/(motion_rotate->m_duration);
+					if(t > 1.0f) {
+						entity->deleteComponent<Motion<Rotation>>();
+						t = 1.0f;
+					}
 
+					glm::quat quat;
+					if(SDL_GetTicks() < motion_rotate->m_time_start + motion_rotate->m_duration/2.f) {
+						quat = glm::slerp(motion_rotate->m_alpha, motion_rotate->m_beta, 2.f*t);
+					} else {
+						quat = glm::slerp(motion_rotate->m_alpha, motion_rotate->m_beta, 2.f - 2.f*t);
+					}
+
+					RenderableComponentPtr render = entity->getComponent<RenderableComponent>();
+					if(render != nullptr) {
+						render->m_renderable->setHeritanceMatrix(motion_rotate->m_heritance*glm::toMat4(quat));
+					}
+
+					CollisablePtr<Cobble> collisable = entity->getComponent<Collisable<Cobble>>();
+					if(collisable != nullptr) {
+						//DrawablePtr parent = render->m_renderable->getParent();
+						//RenderableComponentPtr render_player = m_player->getComponent<RenderableComponent>();
+
+						entity->deleteComponent<Collisable<Cobble>>();
+						//System<Collider>::attachBoundingBoxCollision(entity, m_player);
+
+						//CollisablePtr<Cobble> col = entity->getComponent<Collisable<Cobble>>();
+						//col->m_box->setParent(render_player->m_renderable);
+						//collisable->m_box->setLocalMatrix(motion_rotate->m_local*glm::toMat4(quat));
 					}
 				}
 	        }
 		}
+
+		void setPlayer(const EntityPtr player) {
+			m_player = player;
+		}
+	private:
+		EntityPtr m_player;
 };

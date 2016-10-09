@@ -43,6 +43,8 @@ class PhysicManager {
 				PhysicPtr physic = entity->getComponent<Physic>();
 				MovablePtr movable = entity->getComponent<Movable>();
 
+				glm::vec3 dx(0.f);
+
 				if(movable != nullptr && physic != nullptr) {
 					glm::vec3 gravity_force = gravity(physic);
 					glm::vec3 jump_force(0.f);
@@ -63,17 +65,22 @@ class PhysicManager {
 					movable->m_direction = glm::normalize(velocity);
 					movable->m_speed = glm::length(velocity);
 
-					movable->m_position += velocity*dt;
+					dx = velocity*dt;
+					movable->m_position += dx;
+				}
 
-					RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
-					if(renderable != nullptr) {
-						renderable->m_renderable->translateHeritanceMatrix(velocity*dt*glm::vec3(SIZE_TILE));
-					}
-
+				if(movable != nullptr) {
 					CollisablePtr<Cobble> collisable = entity->getComponent<Collisable<Cobble>>();
 					if(collisable != nullptr) {
-						collisable->m_position += velocity*dt;
-						collisable->m_box->setHeritanceMatrix(glm::translate(glm::mat4(1.0f), (collisable->m_position + collisable->m_size/2.f)*glm::vec3(SIZE_TILE))*glm::toMat4(movable->m_quat));
+						collisable->m_position += dx;
+						movable->m_heritance = glm::translate(movable->m_heritance, dx*glm::vec3(SIZE_TILE));
+
+						RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
+						if(renderable != nullptr) {
+							//renderable->m_renderable->translateHeritanceMatrix(dx);
+							renderable->m_renderable->setHeritanceMatrix(movable->m_heritance * glm::toMat4(movable->m_quat));
+						}
+						collisable->m_box->translateLocalMatrix(dx);
 					}
 				}
 			}

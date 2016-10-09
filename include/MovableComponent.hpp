@@ -14,6 +14,7 @@ struct Movable : public Component {
 	float		m_speed;
 
 	glm::quat	m_quat;
+	glm::mat4	m_heritance;
 };
 
 using MovablePtr = std::shared_ptr<Movable>;

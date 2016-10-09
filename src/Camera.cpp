@@ -18,7 +18,7 @@
 #include "../include/Camera.hpp"
 #include "../include/Entity.h"
 
-#include "../include/Dunjeon.hpp"
+#include "../include/renderable.hpp"
 
 Camera::Camera(Mode mode) : m_orientation(0.f),
 				   m_orientation_height(0.f),	
@@ -228,8 +228,9 @@ void Camera::update() {
 
 			movable->m_direction = glm::vec3(m_direction.x, 0.0f, m_direction.z);
 			movable->m_quat = glm::quat(glm::cos(m_orientation/2.f), 0.f, glm::sin(-m_orientation/2.f), 0.f);
+			m_orientation_height = -3.14f/4.f;
 			//movable->m_rotate = glm::rotate(glm::mat4(1.0f), -360.f*m_orientation/(2*3.14f), glm::vec3(0.f, 1.0f, 0.f));
-			m_position = movable->m_position*glm::vec3(SIZE_TILE);
+			m_position = (movable->m_position - 6.0f*glm::vec3(glm::sin(3.14f/2.f - m_orientation_height)*glm::sin(3.14f/2.f - m_orientation), glm::cos(3.14f/2.f - m_orientation_height), glm::cos(3.14f/2.f - m_orientation)*glm::sin(3.14f/2.f - m_orientation_height)))*glm::vec3(SIZE_TILE);
 
 			//collisable->m_box->setHeritanceMatrix(glm::translate(glm::mat4(1.0f), m_position)*glm::toMat4(movable->m_quat));
 

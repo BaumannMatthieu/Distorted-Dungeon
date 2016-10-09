@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/matthieu/Programmation/cc
+CMAKE_SOURCE_DIR = /home/matthieu/Programmation/Distorted-Dungeon
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/matthieu/Programmation/cc/build
+CMAKE_BINARY_DIR = /home/matthieu/Programmation/Distorted-Dungeon/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Cursed_Crown.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/Cursed_Crown.dir/flags.make
 
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../src/Player.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o -c /home/matthieu/Programmation/cc/src/Player.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/Player.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/Player.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/Player.cpp > CMakeFiles/Cursed_Crown.dir/src/Player.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/Player.cpp > CMakeFiles/Cursed_Crown.dir/src/Player.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/Player.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/Player.cpp -o CMakeFiles/Cursed_Crown.dir/src/Player.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/Player.cpp -o CMakeFiles/Cursed_Crown.dir/src/Player.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o.requires
@@ -74,17 +74,17 @@ CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o.provides.build: CMakeFiles/Cursed_C
 
 CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o: ../src/PlaneRenderable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o -c /home/matthieu/Programmation/cc/src/PlaneRenderable.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/PlaneRenderable.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/PlaneRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/PlaneRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/PlaneRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/PlaneRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o.requires
@@ -97,17 +97,17 @@ CMakeFiles/Cursed_Crown.dir/src/PlaneRenderable.cpp.o.provides.build: CMakeFiles
 
 CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o: ../src/MeshOBJRenderable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o -c /home/matthieu/Programmation/cc/src/MeshOBJRenderable.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/MeshOBJRenderable.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/MeshOBJRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/MeshOBJRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/MeshOBJRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/MeshOBJRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o.requires
@@ -120,17 +120,17 @@ CMakeFiles/Cursed_Crown.dir/src/MeshOBJRenderable.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o: ../src/Room.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o -c /home/matthieu/Programmation/cc/src/Room.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/Room.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/Room.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/Room.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/Room.cpp > CMakeFiles/Cursed_Crown.dir/src/Room.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/Room.cpp > CMakeFiles/Cursed_Crown.dir/src/Room.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/Room.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/Room.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/Room.cpp -o CMakeFiles/Cursed_Crown.dir/src/Room.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/Room.cpp -o CMakeFiles/Cursed_Crown.dir/src/Room.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o.requires
@@ -143,17 +143,17 @@ CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o.provides.build: CMakeFiles/Cursed_Cro
 
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/main.cpp.o -c /home/matthieu/Programmation/cc/src/main.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/main.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/main.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/main.cpp > CMakeFiles/Cursed_Crown.dir/src/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/main.cpp > CMakeFiles/Cursed_Crown.dir/src/main.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/main.cpp -o CMakeFiles/Cursed_Crown.dir/src/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/main.cpp -o CMakeFiles/Cursed_Crown.dir/src/main.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/main.cpp.o.requires
@@ -166,17 +166,17 @@ CMakeFiles/Cursed_Crown.dir/src/main.cpp.o.provides.build: CMakeFiles/Cursed_Cro
 
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o -c /home/matthieu/Programmation/cc/src/ShaderProgram.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/ShaderProgram.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/ShaderProgram.cpp > CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/ShaderProgram.cpp > CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/ShaderProgram.cpp -o CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/ShaderProgram.cpp -o CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o.requires
@@ -189,17 +189,17 @@ CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o.provides.build: CMakeFiles/C
 
 CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o: ../src/Resource.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o -c /home/matthieu/Programmation/cc/src/Resource.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/Resource.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/Resource.cpp > CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/Resource.cpp > CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/Resource.cpp -o CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/Resource.cpp -o CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o.requires
@@ -212,17 +212,17 @@ CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o.provides.build: CMakeFiles/Cursed
 
 CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o: ../src/CubeRenderable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o -c /home/matthieu/Programmation/cc/src/CubeRenderable.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/CubeRenderable.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/CubeRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/CubeRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/CubeRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/CubeRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o.requires
@@ -235,17 +235,17 @@ CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o: ../src/Camera.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o -c /home/matthieu/Programmation/cc/src/Camera.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/Camera.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/Camera.cpp > CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/Camera.cpp > CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/Camera.cpp -o CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/Camera.cpp -o CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o.requires
@@ -258,17 +258,17 @@ CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o.provides.build: CMakeFiles/Cursed_C
 
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../src/Scene.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o -c /home/matthieu/Programmation/cc/src/Scene.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/Scene.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/Scene.cpp > CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/Scene.cpp > CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/Scene.cpp -o CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/Scene.cpp -o CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o.requires
@@ -281,17 +281,17 @@ CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o.provides.build: CMakeFiles/Cursed_Cr
 
 CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o: CMakeFiles/Cursed_Crown.dir/flags.make
 CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o: ../src/LineRenderable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/cc/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o -c /home/matthieu/Programmation/cc/src/LineRenderable.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o -c /home/matthieu/Programmation/Distorted-Dungeon/src/LineRenderable.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/cc/src/LineRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthieu/Programmation/Distorted-Dungeon/src/LineRenderable.cpp > CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.i
 
 CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/cc/src/LineRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthieu/Programmation/Distorted-Dungeon/src/LineRenderable.cpp -o CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.s
 
 CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o.requires:
 .PHONY : CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o.requires
@@ -362,6 +362,6 @@ CMakeFiles/Cursed_Crown.dir/clean:
 .PHONY : CMakeFiles/Cursed_Crown.dir/clean
 
 CMakeFiles/Cursed_Crown.dir/depend:
-	cd /home/matthieu/Programmation/cc/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/matthieu/Programmation/cc /home/matthieu/Programmation/cc /home/matthieu/Programmation/cc/build /home/matthieu/Programmation/cc/build /home/matthieu/Programmation/cc/build/CMakeFiles/Cursed_Crown.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/matthieu/Programmation/Distorted-Dungeon/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/matthieu/Programmation/Distorted-Dungeon /home/matthieu/Programmation/Distorted-Dungeon /home/matthieu/Programmation/Distorted-Dungeon/build /home/matthieu/Programmation/Distorted-Dungeon/build /home/matthieu/Programmation/Distorted-Dungeon/build/CMakeFiles/Cursed_Crown.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Cursed_Crown.dir/depend
 

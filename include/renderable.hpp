@@ -56,8 +56,12 @@ class Drawable : public std::enable_shared_from_this<Drawable> {
 
 		void setParent(const DrawablePtr parent) {
 			m_parent = parent;
-			m_parent->m_children.push_back(shared_from_this());
+			//m_parent->m_children.push_back(shared_from_this());
 			computeModelMatrix();
+		}
+
+		const DrawablePtr getParent() const {
+			return m_parent;
 		}
 
 		void setLocalMatrix(const glm::mat4& model) {
@@ -76,13 +80,20 @@ class Drawable : public std::enable_shared_from_this<Drawable> {
 		}
 		
 		void translateLocalMatrix(const glm::vec3& vector) {
-			m_local = glm::translate(glm::mat4(1.0f), vector)*m_local;
+			m_local = glm::translate(glm::mat4(1.0f), vector*glm::vec3(SIZE_TILE))*m_local;
 			computeModelMatrix();
 		}
 
 		void setHeritanceMatrix(const glm::mat4& model) {
 			m_heritance = model;
 			computeModelMatrix();
+		}
+
+		const glm::mat4& getLocalMatrix() const {
+			return m_local;
+		}
+		const glm::mat4& getHeritanceMatrix() const {
+			return m_heritance;
 		}
 
 		void scaleHeritanceMatrix(const glm::vec3& vector) {
@@ -96,8 +107,12 @@ class Drawable : public std::enable_shared_from_this<Drawable> {
 		}
 		
 		void translateHeritanceMatrix(const glm::vec3& vector) {
-			m_heritance = glm::translate(glm::mat4(1.0f), vector)*m_heritance;
+			m_heritance = glm::translate(glm::mat4(1.0f), vector*glm::vec3(SIZE_TILE))*m_heritance;
 			computeModelMatrix();
+		}
+
+		const glm::mat4& getModelMatrix() const {
+			return m_model;
 		}
 
 		const ShaderProgramPtr getShaderProgram() const {
@@ -105,6 +120,16 @@ class Drawable : public std::enable_shared_from_this<Drawable> {
 		}
 
 		virtual void DrawArrays() = 0;
+
+		const std::vector<glm::vec3>& getPositions() const {
+			/*std::vector<glm::vec3> v;
+			for(auto& position : m_positions) {
+				glm::vec4 r(m_model*glm::vec4(position, 1.0f));
+				v.push_back(glm::vec3(r));
+			}
+			return v;*/
+			return m_positions;
+		}
 	
 	protected:
 		void computeModelMatrix() {
@@ -133,7 +158,7 @@ class Drawable : public std::enable_shared_from_this<Drawable> {
 
 		glm::mat4 					m_model;
 
-		std::vector<DrawablePtr> 	m_children;
+		//std::vector<DrawablePtr> 	m_children;
 		DrawablePtr				 	m_parent;
 };
 
@@ -183,7 +208,7 @@ class Renderable : public Drawable {
 								  m_tex_coords);
 
 			// Material
-			m_material.shininess = 0.5f;
+			m_material.shininess = 16.f;
 
 			// Creation Vertex Buffer Objects
 			glGenBuffers(1, &m_vertex_buffer_positions_id);
@@ -220,6 +245,8 @@ class Renderable : public Drawable {
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+			scaleLocalMatrix(glm::vec3(SIZE_TILE));
+
 			m_textureID = CreateBufferTexture(key_texture);
 		}
 
@@ -241,7 +268,7 @@ class Renderable : public Drawable {
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(m_model));
 
 			int invModelLocation = m_shader->getUniformLocation("inv_model");
-			glUniformMatrix3fv(invModelLocation, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(glm::mat3(m_model)))));
+			glUniformMatrix4fv(invModelLocation, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(m_model))));
 
 			int materialShininessLocation = m_shader->getUniformLocation("material.shininess");
 			glUniform1f(materialShininessLocation, m_material.shininess);
@@ -406,6 +433,8 @@ class Renderable<Skybox> : public Drawable {
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			m_textureID = Skybox::CreateBufferTexture();
+
+			scaleLocalMatrix(glm::vec3(SIZE_TILE));
 		}
 
 		virtual ~Renderable() {
@@ -497,6 +526,8 @@ class Renderable<Billboard> : public Drawable {
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			m_textureID = CreateBufferTexture(key_texture);
+
+			scaleLocalMatrix(glm::vec3(SIZE_TILE));
 		}
 
 		virtual ~Renderable() {
@@ -513,7 +544,7 @@ class Renderable<Billboard> : public Drawable {
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(m_model));
 
 			int invModelLocation = m_shader->getUniformLocation("inv_model");
-			glUniformMatrix3fv(invModelLocation, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(glm::mat3(m_model)))));
+			glUniformMatrix4fv(invModelLocation, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(m_model))));
 
 			int materialShininessLocation = m_shader->getUniformLocation("material.shininess");
 			glUniform1f(materialShininessLocation, m_material.shininess);
@@ -603,7 +634,7 @@ class Renderable<MeshOBJ> : public Drawable {
 			m_normals = mesh->getNormals();
 			m_tex_coords = mesh->getTexcoords();
 
-			m_material.shininess = 0.5f;
+			m_material.shininess = 100.0f;
 
 			// Creation Vertex Buffer Objects
 			glGenBuffers(1, &m_vertex_buffer_positions_id);
@@ -633,6 +664,8 @@ class Renderable<MeshOBJ> : public Drawable {
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			m_textureID = CreateBufferTexture(key_texture);
+
+			scaleLocalMatrix(glm::vec3(SIZE_TILE));
 		}
 
 		virtual ~Renderable() {
@@ -651,7 +684,7 @@ class Renderable<MeshOBJ> : public Drawable {
 			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(m_model));
 
 			int invModelLocation = m_shader->getUniformLocation("inv_model");
-			glUniformMatrix3fv(invModelLocation, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(glm::mat3(m_model)))));
+			glUniformMatrix4fv(invModelLocation, 1, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(m_model))));
 
 			int textureLocation = m_shader->getUniformLocation("texSampler");
 
@@ -726,6 +759,7 @@ class Renderable<Line> : public Drawable {
 				   const glm::vec4& c2 = glm::vec4(1.f, 1.f, 1.f, 1.f)) : Drawable(shader)  {
 			setLine(p1, p2, c1, c2);
 
+
 			// Creation Vertex Buffer Objects
 			glGenBuffers(1, &m_vertex_buffer_positions_id);
 			glGenBuffers(1, &m_vertex_buffer_colors_id);
@@ -745,12 +779,14 @@ class Renderable<Line> : public Drawable {
 						 GL_STATIC_DRAW);
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+			scaleLocalMatrix(glm::vec3(SIZE_TILE));
 		}
 
 		void setLine(const glm::vec3& p1, const glm::vec3& p2, const glm::vec4& c1, const glm::vec4& c2) {
 			m_positions.clear();
-			m_positions.push_back(p1);
-			m_positions.push_back(p2);
+			m_positions.push_back(p1*glm::vec3(SIZE_TILE));
+			m_positions.push_back(p2*glm::vec3(SIZE_TILE));
 
 			m_colors.clear();
 			m_colors.push_back(c1);
@@ -829,12 +865,13 @@ class Renderable<Box> : public Drawable {
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-			glm::vec3 unitWorld(SIZE_TILE, SIZE_TILE, SIZE_TILE);
-
-			scaleLocalMatrix(size*unitWorld);
-			translateHeritanceMatrix((position + size/2.f)*unitWorld);
+			//glm::vec3 unitWorld(SIZE_TILE, SIZE_TILE, SIZE_TILE);
 
 			m_size = size;
+			m_center = (position + size/2.f);
+
+			scaleLocalMatrix(m_size*glm::vec3(SIZE_TILE));
+			translateLocalMatrix(m_center);
 		}
 
 		virtual ~Renderable() {
@@ -869,9 +906,22 @@ class Renderable<Box> : public Drawable {
 		void DrawArrays() {
 			//glDisable(GL_DEPTH_TEST);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-			glDrawArrays( GL_TRIANGLES, 0, m_positions.size());
+			glDrawArrays(GL_TRIANGLES, 0, m_positions.size());
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			//glEnable(GL_DEPTH_TEST);
+		}
+
+		void setDimensions(const glm::vec3& center, const glm::vec3& size) {
+			m_center = center;
+			m_size = size;
+
+			//glm::vec3 unitWorld(SIZE_TILE, SIZE_TILE, SIZE_TILE);
+
+			/*setLocalMatrix(glm::mat4(1.0f));
+			setHeritanceMatrix(glm::mat4(1.0f));
+			
+			scaleLocalMatrix(m_size);
+			translateHeritanceMatrix(m_center);*/
 		}
 
 		/*void setPosition(const glm::vec3& position) {

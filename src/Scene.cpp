@@ -97,6 +97,7 @@ Scene::Scene() {
 	m_physic.setPlayer(m_player->getEntity());
 	m_collided.setPlayer(m_player->getEntity());
 	m_interaction.setPlayer(m_player->getEntity());
+	m_motion.setPlayer(m_player->getEntity());
 
 	unsigned int num_platform = 5;
 
@@ -133,6 +134,17 @@ Scene::Scene() {
 		m_entitys.add(platform);
 	}
 
+	/*EntityPtr entity = std::make_shared<Entity>();
+	RenderablePtr<MeshOBJ> goblin_mesh = std::make_shared<Renderable<MeshOBJ>>(shaders.get("textured"), "cube", "wall");
+	RenderableComponentPtr render = std::make_shared<RenderableComponent>();
+	goblin_mesh->scaleLocalMatrix(glm::vec3(1.0f, 1.0f, 1.0f));
+	goblin_mesh->translateHeritanceMatrix(glm::vec3(3.0f, 0.f, 1.0f));
+	render->m_renderable = goblin_mesh;
+	entity->addComponent<RenderableComponent>(render);
+
+	System<Collider>::attachBoundingBoxCollision(entity);
+	m_entitys.add(entity);*/
+
 	// Systems initialization
 	m_collider.setDungeon(m_dungeon);
 
@@ -154,7 +166,6 @@ Scene::~Scene() {
 
 void Scene::run() {
 	std::vector<EntityPtr>& entitys = m_entitys.getEntitys();
-
 
 	m_magic.run(entitys);
 	m_motion.run(entitys);

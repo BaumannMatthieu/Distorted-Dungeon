@@ -1,12 +1,59 @@
-#version 400
+#version 330
+
+in vec4 c;
+in vec2 tx;
+in vec3 V;
+in vec3 N;
+in vec3 C;
+
+out vec4 color;
 
 uniform sampler2D texSampler;
 
-in vec2 out_texcoords;
-in vec4 out_color;
+struct Material {
+	float shininess;	
+};
 
-out vec4 col;
+struct PointLight {
+	vec3 position;
+	
+	vec3 ambiant;
+	vec3 diffuse;
+	vec3 specular;
+
+	float constant;
+	float linear;
+	float quadratic;
+};
+
+uniform Material material;
+
+#define MAX_NUM_LIGHTS 50
+uniform PointLight light[MAX_NUM_LIGHTS];
+
+uniform int num_lights;
  
 void main(void) {
-    col = texture2D(texSampler, out_texcoords);
+	int size_light = min(MAX_NUM_LIGHTS, num_lights);
+
+	vec3 ambiant, diffuse, specular;
+	
+	for(int i = 0; i < size_light; ++i) {
+		vec3 L = normalize(light[i].position - V);
+		vec3 E = normalize(C-V);
+		vec3 R = normalize(reflect(-L, N));
+		vec3 n = normalize(N);
+
+		float diff = max(0.0, dot(L, n));
+		float spec = pow(max(0.0, dot(R, E)), material.shininess); 
+		float distance = length(light[i].position - V);
+
+		//float attenuation = 48.0/(light[i].constant + light[i].linear*distance + light[i].quadratic*(distance*distance));
+		float attenuation = 1.0f;
+		ambiant += texture(texSampler, tx).rgb * 0.1f;
+		diffuse += diff * texture(texSampler, tx).rgb * 1.f;
+		specular += spec * texture(texSampler, tx).rgb * 1.f;
+	}
+
+    color = vec4(ambiant + diffuse + specular, 1.0);
 }
