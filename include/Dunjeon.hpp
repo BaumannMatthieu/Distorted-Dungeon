@@ -257,6 +257,26 @@ class Dungeon {
 					e->addComponent<RenderableComponent>(r);
 					entity_manager.add(e);*/
 					entity_manager.add(entity);
+
+					std::vector<glm::vec3> position_colonnes(4);
+					position_colonnes[0] = glm::vec3(m_rooms[k].getSize().x/2.f - 0.25f, 0.f, m_rooms[k].getSize().z/2.f - 0.25f);
+					position_colonnes[1] = glm::vec3(m_rooms[k].getSize().x/2.f - 0.25f, 0.f, -m_rooms[k].getSize().z/2.f + 0.25f);
+					position_colonnes[2] = glm::vec3(-m_rooms[k].getSize().x/2.f + 0.25f, 0.f, m_rooms[k].getSize().z/2.f - 0.25f);
+					position_colonnes[3] = glm::vec3(-m_rooms[k].getSize().x/2.f + 0.25f, 0.f, -m_rooms[k].getSize().z/2.f + 0.25f);
+
+					for(unsigned int i = 0; i < 4; ++i) {
+						EntityPtr colonne = std::make_shared<Entity>();
+						RenderablePtr<MeshOBJ> colonne_render = std::make_shared<Renderable<MeshOBJ>>(shaders.get("textured"), "colonne", "wall");
+
+						colonne_render->scaleLocalMatrix(glm::vec3(0.25f, 0.25f, 0.25f));
+						colonne_render->translateHeritanceMatrix(glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z) + position_colonnes[i]);
+						
+						RenderableComponentPtr render = std::make_shared<RenderableComponent>();
+						render->m_renderable = colonne_render;
+						colonne->addComponent<RenderableComponent>(render);
+
+						entity_manager.add(colonne);
+					}
 				}
 			}
 

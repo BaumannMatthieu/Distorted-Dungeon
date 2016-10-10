@@ -118,6 +118,7 @@ int main(int argc, char *argv[])
 	textures.add("../data/textures/goblin-texture.bmp", "goblin");
 	textures.add("../data/textures/ward-texture.bmp", "ward-texture");
 	textures.add("../data/textures/smoke.bmp", "smoke");
+	textures.add("../data/textures/colonne_l.bmp", "colonne_l");
 
 	textures.add("../data/textures/front.bmp", "front");
 	textures.add("../data/textures/left.bmp", "left");
@@ -130,6 +131,7 @@ int main(int argc, char *argv[])
 	meshes.add("../data/meshes/axe.obj", "axe");
 	meshes.add("../data/meshes/Goblin.obj", "goblin");
 	meshes.add("../data/meshes/theWard.obj", "ward");
+	meshes.add("../data/meshes/colonne1.obj", "colonne");
 
 	shaders.add("../shaders/textured", "textured");
 	shaders.add("../shaders/fire", "fire");

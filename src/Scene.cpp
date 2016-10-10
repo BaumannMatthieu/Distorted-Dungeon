@@ -135,6 +135,8 @@ Scene::Scene() {
 		m_entitys.add(platform);
 	}
 
+
+
 	/*EntityPtr entity = std::make_shared<Entity>();
 	RenderablePtr<MeshOBJ> goblin_mesh = std::make_shared<Renderable<MeshOBJ>>(shaders.get("textured"), "cube", "wall");
 	RenderableComponentPtr render = std::make_shared<RenderableComponent>();
