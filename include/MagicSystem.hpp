@@ -9,12 +9,13 @@
 
 #include "../include/Resource.hpp"
 #include "../include/MovableComponent.hpp"
+#include "../include/Carryable.hpp"
+#include "../include/RenderableParticles.hpp"
+#include "../include/Light.hpp"
 
-struct Damage : public Component {
-	unsigned int 	m_damage;
-};
+#include <glm/gtx/vector_angle.hpp>
 
-using Damage = struct Damage;
+/*using Damage = struct Damage;
 using DamagePtr = std::shared_ptr<Damage>;
 
 struct Spell : public Component {
@@ -32,89 +33,168 @@ struct Dot : public Component {
 };
 
 using Dot = struct Dot;
-using DotPtr = std::shared_ptr<Dot>;
+using DotPtr = std::shared_ptr<Dot>;*/
 
 struct Caster : public Component {
 	unsigned int				m_mana;
+	unsigned int 				m_stamina;
 
-	unsigned int				m_selected_spell;
+	unsigned int				m_selected_technic;
 
-	std::vector<SpellPtr>		m_spells;
+	std::vector<EntityPtr>		m_entitys;
 	std::vector<unsigned int>	m_last_time;
+};
+
+struct Triggerable : public Component {
+	EntityPtr		m_thrower;
+
+	unsigned int	m_mana_cost;
+	unsigned int    m_stamina_cost;
+
+	unsigned int	m_cooldown;
+	unsigned int	m_duration;
 };
 
 using Caster = struct Caster;
 using CasterPtr = std::shared_ptr<Caster>;
 
+using TriggerablePtr = std::shared_ptr<Triggerable>;
+
 class Magic {
 	public:
 		void run(std::vector<EntityPtr>& entitys) {	
-			std::vector<EntityPtr> casters = EntityManager::getEntitysByComponent<Caster>(entitys);
+			//std::vector<EntityPtr> casters = EntityManager::getEntitysByComponent<Caster>(entitys);
 
-			for(auto& entity : casters) {
+			for(auto& entity : entitys) {
 	           	if(entity == m_player) {
 	           		actionPlayer(entitys);
 	           	}
 	        }
 		}
 
-		void setPlayer(const PlayerPtr player) {
-			m_player = player->getEntity();
+		void setPlayer(const EntityPtr player) {
+			m_player = player;
 		};
 
 		void actionPlayer(std::vector<EntityPtr>& entitys) {
 			CasterPtr caster = m_player->getComponent<Caster>();
 
-			unsigned int spell_selected_id = caster->m_selected_spell;
-			SpellPtr spell_selected = m_player->getComponent<Caster>()->m_spells[spell_selected_id];
+			unsigned int technic_selected_id = caster->m_selected_technic;
+			EntityPtr entity_triggerable = m_player->getComponent<Caster>()->m_entitys[technic_selected_id];
+			TriggerablePtr triggerable = entity_triggerable->getComponent<Triggerable>();
 
-			if(spell_selected->m_cooldown + caster->m_last_time[spell_selected_id] <= SDL_GetTicks()) {
+			if(triggerable->m_cooldown + caster->m_last_time[technic_selected_id] <= SDL_GetTicks()) {
 				SDL_PumpEvents();
 				const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
 				if(keystate[SDL_SCANCODE_SPACE]) {
-					std::cout << "SPELL ! " << std::endl;
+					std::cout << "FIREBOWL ! " << std::endl;
 					// Launch the spell
-					EntityPtr spell = std::make_shared<Entity>();
-									
-					SpellPtr caract = std::make_shared<Spell>();
-					caract->m_cooldown = 1000;
-					caract->m_duration = 0;
-					caract->m_cost = 20;
-					spell->addComponent<Spell>(caract);
+					//createFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z));
+					createCircleFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z), 5);
 
-					DamagePtr damage = std::make_shared<Damage>();
-					damage->m_damage = 20;
-					spell->addComponent<Damage>(damage);
-
-					/*PositionPtr position = std::make_shared<Position>();
-					position->m_position = m_player->getComponent<Position>()->m_position;
-					spell->addComponent<Position>(position);*/
-
-					MovablePtr movable = std::make_shared<Movable>();
-					movable->m_direction = camera->getDirection();
-					movable->m_position = m_player->getComponent<Movable>()->m_position;
-					movable->m_speed = 0.01f;
-					spell->addComponent<Movable>(movable);
-
-					glm::vec3 position_box(movable->m_position);
-					glm::vec3 size_box(0.1f, 0.1f, 0.1f);
-					glm::vec4 color_box(1.0f, 0.0f, 0.0f, 1.0f);
-
-					RenderablePtr<Box> box = std::make_shared<Renderable<Box>>(shaders.get("wireframe"),
-																					  position_box,
-																					  size_box,
-																					  color_box);
-					RenderableComponentPtr renderable_component = std::make_shared<RenderableComponent>();
-					renderable_component->m_renderable = box;
-					spell->addComponent<RenderableComponent>(renderable_component);
-
-					entitys.push_back(spell);
-
-					caster->m_last_time[spell_selected_id] = SDL_GetTicks();
+					caster->m_last_time[technic_selected_id] = SDL_GetTicks();
 				}
 			}
 		};
+
+		static void createFireBowl(std::vector<EntityPtr>& entitys, const EntityPtr& triggerer, const glm::vec3& direction) {
+			EntityPtr firebowl = std::make_shared<Entity>();
+									
+			TriggerablePtr caract = std::make_shared<Triggerable>();
+			caract->m_cooldown = 500;
+			caract->m_duration = 0;
+			caract->m_mana_cost = 20;
+			caract->m_stamina_cost = 0;
+			caract->m_thrower = triggerer;
+			firebowl->addComponent<Triggerable>(caract);
+
+			MovablePtr movable = std::make_shared<Movable>();
+			movable->m_direction = direction;
+			movable->m_position = triggerer->getComponent<Movable>()->m_position;
+			movable->m_speed = 5.f;
+			firebowl->addComponent<Movable>(movable);
+
+			DamagePtr direct_damage = std::make_shared<Damage>();
+			direct_damage->m_damage = 20;
+			direct_damage->m_script = [&direct_damage](EntityPtr opponent) {
+				KillablePtr status = opponent->getComponent<Killable>();
+				status->m_life -= direct_damage->m_damage;
+			};
+
+			EffectCollidedPtr effect = std::make_shared<EffectCollided>();
+			effect->m_effects.insert(direct_damage);
+
+			firebowl->addComponent<EffectCollided>(effect);
+
+			glm::vec3 position_box(movable->m_position);
+			glm::vec3 size_box(0.05f, 0.05f, 0.05f);
+			glm::vec4 color_box(1.0f, 0.0f, 0.0f, 1.0f);
+
+			CollisablePtr<Cobble> collisable = std::make_shared<Collisable<Cobble>>();
+
+			collisable->m_size = size_box;
+			collisable->m_position = position_box;
+			collisable->m_box = std::make_shared<Renderable<Box>>(shaders.get("wireframe"),
+																  collisable->m_position,
+																  collisable->m_size,
+																  color_box);
+			firebowl->addComponent<Collisable<Cobble>>(collisable);
+
+			RenderablePtr<ParticleSystem<Fire>> firebowl_particle_system = std::make_shared<Renderable<ParticleSystem<Fire>>>(shaders.get("fire"), "smoke");
+			firebowl_particle_system->bindParticleSystem(movable->m_position, glm::vec2(0.1f));
+
+			RenderableComponentPtr renderable_component = std::make_shared<RenderableComponent>();
+			renderable_component->m_renderable = firebowl_particle_system;
+			firebowl->addComponent<RenderableComponent>(renderable_component);
+
+			LightPtr<Ponctual> light = std::make_shared<Light<Ponctual>>();
+			light->m_position = glm::vec3(movable->m_position);
+			
+			light->m_ambiant = glm::vec3(0.5f, 0.f, 0.f);
+			light->m_diffuse = glm::vec3(1.0f, 1.0f, 1.f);
+			light->m_specular = glm::vec3(1.0f, 1.0f, 1.f);
+
+			light->m_constant = 0.01f;
+			light->m_linear = 0.02f;
+			light->m_quadratic = 0.03f;
+			firebowl->addComponent<Light<Ponctual>>(light);
+
+			entitys.push_back(firebowl);
+		}
+
+		static void createCircleFireBowl(std::vector<EntityPtr>& entitys,
+										 const EntityPtr& triggerer,
+										 glm::vec3 direction_entity,
+										 unsigned int num_firebowl) {
+			float dtheta = 2*3.14f/num_firebowl; 
+
+			
+			glm::vec2 u(1.0f, 0.f);
+			glm::vec2 v(direction_entity.x, direction_entity.z);
+			v = glm::normalize(v);
+			float c = getCosAngle(u, v);
+			float phi = 0.f;
+			if(signAnglePositive(u, v)) {
+				phi = glm::acos(c);
+			} else {
+				phi = -glm::acos(c);
+			}
+
+			for(unsigned int i = 0; i < num_firebowl; ++i) {
+				glm::vec3 direction(glm::cos(dtheta*i + phi), 0.f, glm::sin(dtheta*i + phi));
+				createFireBowl(entitys, triggerer, direction);
+			}
+		}
+
+		static bool signAnglePositive(const glm::vec2& u, const glm::vec2& v) {
+			float s = u.x*v.y - u.y*v.x;
+			return (s > 0);
+		}
+
+		static float getCosAngle(const glm::vec2& u, const glm::vec2& v) {
+			return glm::dot(u, v);
+		}
 
 	private:
 		EntityPtr		m_player;

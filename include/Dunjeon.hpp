@@ -251,6 +251,11 @@ class Dungeon {
 
 					entity->addComponent<Collisable<Cobble>>(collisable);
 
+					/*EntityPtr e = std::make_shared<Entity>();
+					RenderableComponentPtr r = std::make_shared<RenderableComponent>();
+					r->m_renderable = collisable->m_box;
+					e->addComponent<RenderableComponent>(r);
+					entity_manager.add(e);*/
 					entity_manager.add(entity);
 				}
 			}
@@ -405,15 +410,17 @@ class Dungeon {
 			for(unsigned int j = 0; j < tiles_corridors.size(); ++j) {
 				EntityPtr entity = std::make_shared<Entity>();
 
-				RenderablePtr<Plane> tile = std::make_shared<Renderable<Plane>>(textured, "stone");
+				RenderablePtr<Plane> tile_render = std::make_shared<Renderable<Plane>>(textured, "stone");
 				//glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
 				glm::vec3 translate(tiles_corridors[j].first, 0.f, tiles_corridors[j].second);
 				
-				tile->translateLocalMatrix(glm::vec3(0.5f, 0.f, 0.5f));
-				tile->translateLocalMatrix(translate);
+				//tile->scaleLocalMatrix(glm::vec3(1.f));
+				tile_render->scaleLocalMatrix(glm::vec3(1.0f, 0.f, 1.0f));
+				tile_render->translateLocalMatrix(translate + glm::vec3(0.5f, 0.f, 0.5f));
+				//tile_render->scaleTexCoords(glm::vec2(1.0f));
 
 				RenderableComponentPtr renderable_component = std::make_shared<RenderableComponent>();
-				renderable_component->m_renderable = tile;
+				renderable_component->m_renderable = tile_render;
 				
 				entity->addComponent<RenderableComponent>(renderable_component);
 

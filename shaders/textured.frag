@@ -43,9 +43,9 @@ void main(void) {
 
 		vec3 HalfVector = normalize(LightVect + EyeVect);
 
-	    vec4 Ca = texture(texSampler, tx);
-	    vec4 Cd = max(0.0, dot(LightVect, NormalVect)) * texture(texSampler, tx);
-	    vec4 Cs = pow(max(0.0, dot(NormalVect, HalfVector)), 4.0f*material.shininess) * texture(texSampler, tx);
+	    vec4 Ca = texture(texSampler, tx)*vec4(light[i].ambiant, 1.0f);
+	    vec4 Cd = max(0.0, dot(LightVect, NormalVect)) * texture(texSampler, tx) * vec4(light[i].diffuse, 1.0f);
+	    vec4 Cs = pow(max(0.0, dot(NormalVect, HalfVector)), 4.0f*material.shininess) * texture(texSampler, tx) * vec4(light[i].specular, 1.0f);
 
 	    float distance = length(light[i].position - V);
 	    float attenuation = 48.f/(light[i].constant + light[i].linear*distance + light[i].quadratic*(distance*distance));

@@ -45,41 +45,49 @@ class PhysicManager {
 
 				glm::vec3 dx(0.f);
 
-				if(movable != nullptr && physic != nullptr) {
-					glm::vec3 gravity_force = gravity(physic);
-					glm::vec3 jump_force(0.f);
-
-					// Force which is just for player : jump force
-					if((SDL_GetTicks() - m_time_start_jump) < m_duration_jump && entity == m_player) {
-						jump_force = glm::vec3(movable->m_direction.x*movable->m_speed*100.f, 400.f, movable->m_direction.z*movable->m_speed*100.f);
-					}
-
-					glm::vec3 velocity = movable->m_direction*movable->m_speed + (jump_force + gravity_force)*dt;
-
-					if(glm::length(velocity) == 0) {
-						movable->m_direction = velocity;
-						movable->m_speed = 0.f;
-						continue;
-					}
-
-					movable->m_direction = glm::normalize(velocity);
-					movable->m_speed = glm::length(velocity);
-
-					dx = velocity*dt;
-					movable->m_position += dx;
-				}
-
 				if(movable != nullptr) {
+					if(physic != nullptr) {
+						glm::vec3 gravity_force = gravity(physic);
+						glm::vec3 jump_force(0.f);
+
+						// Force which is just for player : jump force
+						if((SDL_GetTicks() - m_time_start_jump) < m_duration_jump && entity == m_player) {
+							jump_force = glm::vec3(movable->m_direction.x*movable->m_speed*100.f, 400.f, movable->m_direction.z*movable->m_speed*100.f);
+						}
+
+						glm::vec3 velocity = movable->m_direction*movable->m_speed + (jump_force + gravity_force)*dt;
+
+						if(glm::length(velocity) == 0) {
+							movable->m_direction = velocity;
+							movable->m_speed = 0.f;
+							continue;
+						}
+
+						movable->m_direction = glm::normalize(velocity);
+						movable->m_speed = glm::length(velocity);
+
+						dx = velocity*dt;
+						movable->m_position += dx;
+					} else {
+						glm::vec3 velocity = movable->m_direction*movable->m_speed;
+						dx = velocity*dt;
+					}
+
+					movable->m_heritance = glm::translate(movable->m_heritance, dx*glm::vec3(SIZE_TILE));
+					RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
+					if(renderable != nullptr) {
+						renderable->m_renderable->setHeritanceMatrix(movable->m_heritance * glm::toMat4(movable->m_quat));
+					}
+
+					LightPtr<Ponctual> light = entity->getComponent<Light<Ponctual>>();
+					if(light != nullptr) {
+						light->m_position += dx;
+					}
+
 					CollisablePtr<Cobble> collisable = entity->getComponent<Collisable<Cobble>>();
 					if(collisable != nullptr) {
 						collisable->m_position += dx;
-						movable->m_heritance = glm::translate(movable->m_heritance, dx*glm::vec3(SIZE_TILE));
-
-						RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
-						if(renderable != nullptr) {
-							//renderable->m_renderable->translateHeritanceMatrix(dx);
-							renderable->m_renderable->setHeritanceMatrix(movable->m_heritance * glm::toMat4(movable->m_quat));
-						}
+						
 						collisable->m_box->translateLocalMatrix(dx);
 					}
 				}

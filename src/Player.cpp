@@ -50,13 +50,19 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 	//System<Collider>::attachBoundingBoxCollision(m_entity, nullptr);
 
 
+
+
+	EntityPtr firebowl = std::make_shared<Entity>();
+	TriggerablePtr triggerable = std::make_shared<Triggerable>();
+	triggerable->m_mana_cost = 20;
+	triggerable->m_stamina_cost = 0;
+	triggerable->m_cooldown = 200;
+	triggerable->m_duration = 0;
+	firebowl->addComponent<Triggerable>(triggerable);
+
 	CasterPtr caster = std::make_shared<Caster>();
-	caster->m_selected_spell = 0;
-	SpellPtr firebowl = std::make_shared<Spell>();
-	firebowl->m_cost = 20;
-	firebowl->m_cooldown = 1000;
-	firebowl->m_duration = 0;
-	caster->m_spells.push_back(firebowl);
+	caster->m_selected_technic = 0;
+	caster->m_entitys.push_back(firebowl);
 	caster->m_last_time.push_back(SDL_GetTicks());
 	m_entity->addComponent<Caster>(caster);
 

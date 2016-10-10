@@ -82,7 +82,6 @@ class Collider {
 							}
 
 							if(collision) {
-								std::cout << "COLLIDE" << std::endl;
 								CollidedPtr collided = entity->getComponent<CollidedComponent>();
 								if(collided == nullptr) {
 									collided = std::make_shared<CollidedComponent>();

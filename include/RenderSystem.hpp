@@ -38,7 +38,7 @@ class Render {
 					std::string light_str = "light[" + ss.str() + "].";
 
 					int lightPositionLocation = shader->getUniformLocation(light_str + "position");
-					glUniform3fv(lightPositionLocation, 1, glm::value_ptr(light->m_position));
+					glUniform3fv(lightPositionLocation, 1, glm::value_ptr(light->m_position*glm::vec3(SIZE_TILE)));
 
 					int lightAmbiantColorLocation = shader->getUniformLocation(light_str + "ambiant");
 					glUniform3fv(lightAmbiantColorLocation, 1, glm::value_ptr(light->m_ambiant));
@@ -63,13 +63,14 @@ class Render {
 				shader->unbind();
             }
 
-			CollisablePtr<Cobble> AABB = entity->getComponent<Collisable<Cobble>>();
+			/*CollisablePtr<Cobble> AABB = entity->getComponent<Collisable<Cobble>>();
             if(AABB != nullptr) {
+            	std::cout << "dfsfsf" << std::endl;
             	ShaderProgramPtr shader = AABB->m_box->getShaderProgram();
 				shader->bind();
 				AABB->m_box->draw();
 				shader->unbind();
-            }
+            }*/
         }
 	}
 };

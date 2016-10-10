@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <set>
 
 #include "../include/System.h"
 #include "../include/Entity.h"
@@ -50,37 +51,48 @@ using EquippedPtr = std::shared_ptr<Equipped>;
 using CarriedPtr = std::shared_ptr<Carried>;
 using ContainerPtr = std::shared_ptr<Container>;
 
-template<typename Type>
-struct Effect;
-
-template<typename Type>
-using EffectPtr = std::shared_ptr<Effect<Type>>;
-
-template<typename Type>
-struct Effect : public Component, public Type {
-	std::function<void (const EntityPtr, EffectPtr<Type>)>		m_script;
+struct Effect {
+	std::function<void (EntityPtr)>			m_script;
 };
 
-struct Speed {
+using EffectPtr = std::shared_ptr<Effect>;
+
+struct Speed : public Effect {
 	float							m_speed_factor;
 };
 
-struct DoT {
+struct Damage : public Effect {
+	unsigned int 					m_damage;
+};
+
+using DamagePtr = std::shared_ptr<Damage>;
+
+struct DoT : public Effect {
 	float							m_damage_by_sec;
 	float							m_duration_damage;
 };
 
-struct HoT {
+struct HoT : public Effect {
 	float							m_heal_by_sec;
 	float							m_duration_heal;
 };
 
-struct Move {
+struct Move : public Effect {
 	glm::vec3						m_position;
 };
 
-template<typename Type>
-using EffectPtr = std::shared_ptr<Effect<Type>>;
+struct EffectCollided : public Component {
+	std::set<EffectPtr>			m_effects;
+};
+
+using EffectCollidedPtr = std::shared_ptr<EffectCollided>;
+
+struct Killable : public Component {
+	unsigned int 		m_life;
+	unsigned int 		m_defense;
+};
+
+using KillablePtr = std::shared_ptr<Killable>;
 
 class Interaction {
 	public:

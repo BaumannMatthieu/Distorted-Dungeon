@@ -9,6 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "../include/Component.h"
+#include "../include/renderable.hpp"
 
 template<typename Type>
 struct Light : public Component, public Type {
@@ -27,6 +28,4 @@ using LightPtr = std::shared_ptr<Light<Type>>;
 struct Ponctual {
 	glm::vec3	m_position;
 };
-
-
 

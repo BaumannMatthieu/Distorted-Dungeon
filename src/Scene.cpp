@@ -14,6 +14,7 @@
 #include "../include/MeshOBJRenderable.hpp"
 
 #include "../include/RenderableComponent.hpp"
+#include "../include/RenderableParticles.hpp"
 #include "../include/MovableComponent.hpp"
 
 #include "../include/RenderSystem.hpp"
@@ -30,8 +31,6 @@ Scene::Scene() {
 	m_dungeon = std::make_shared<Dungeon>(generator, 40, m_entitys);
 	m_player = std::make_shared<Player>(m_dungeon, m_entitys);
 
-	glm::vec3 scale(SIZE_TILE, SIZE_TILE, SIZE_TILE);
-
 	ShaderProgramPtr textured = std::make_shared<ShaderProgram>("../shaders/textured.vert", "../shaders/textured.frag");
 	ShaderProgramPtr billboard = std::make_shared<ShaderProgram>("../shaders/billboard.vert", "../shaders/billboard.frag");
 	
@@ -42,16 +41,18 @@ Scene::Scene() {
 		RenderableComponentPtr renderable_component = std::make_shared<RenderableComponent>();
 		renderable_component->m_renderable = cube;
 
-		cube->translateLocalMatrix(glm::vec3(room.getCenter().x, 1.f, room.getCenter().z)*scale);
-		
+		cube->scaleLocalMatrix(glm::vec3(0.07f));
+		cube->translateLocalMatrix(glm::vec3(room.getCenter().x, 1.f, room.getCenter().z));
+
+
 		mesh->addComponent<RenderableComponent>(renderable_component);
 		m_entitys.add(mesh);
 
 		EntityPtr light = std::make_shared<Entity>();
 		LightPtr<Ponctual> l = std::make_shared<Light<Ponctual>>();
-		l->m_position = glm::vec3(room.getCenter().x, 1.0f, room.getCenter().z)*scale;
+		l->m_position = glm::vec3(room.getCenter().x, 1.0f, room.getCenter().z);
 		
-		l->m_ambiant = glm::vec3(0.5f, 0.f, 0.f);
+		l->m_ambiant = glm::vec3(0.1f, 0.5f, 0.5f);
 		l->m_diffuse = glm::vec3(1.0f, 1.0f, 1.f);
 		l->m_specular = glm::vec3(1.0f, 1.0f, 1.f);
 
@@ -93,7 +94,7 @@ Scene::Scene() {
 	}*/
 	
 	camera->setPlayer(m_player);
-	m_magic.setPlayer(m_player);
+	m_magic.setPlayer(m_player->getEntity());
 	m_physic.setPlayer(m_player->getEntity());
 	m_collided.setPlayer(m_player->getEntity());
 	m_interaction.setPlayer(m_player->getEntity());

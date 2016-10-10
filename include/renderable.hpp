@@ -21,7 +21,7 @@
 class Drawable;
 using DrawablePtr = std::shared_ptr<Drawable>;
 
-class Drawable : public std::enable_shared_from_this<Drawable> {
+class Drawable {
 	public:
 		Drawable(const ShaderProgramPtr shader) : m_shader(shader),
 												  m_model(glm::mat4(1.0f)),
@@ -122,12 +122,6 @@ class Drawable : public std::enable_shared_from_this<Drawable> {
 		virtual void DrawArrays() = 0;
 
 		const std::vector<glm::vec3>& getPositions() const {
-			/*std::vector<glm::vec3> v;
-			for(auto& position : m_positions) {
-				glm::vec4 r(m_model*glm::vec4(position, 1.0f));
-				v.push_back(glm::vec3(r));
-			}
-			return v;*/
 			return m_positions;
 		}
 	
@@ -474,7 +468,6 @@ class Renderable<Skybox> : public Drawable {
 		GLuint						m_textureID;
 		GLuint 						m_vertex_buffer_texcoords_id;
 };
-
 
 class Billboard {
 	public:

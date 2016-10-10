@@ -49,6 +49,7 @@ CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Component.h
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Dunjeon.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Entity.h
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/EntityManager.h
+CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Light.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/LineRenderable.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/MagicSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/MeshOBJRenderable.hpp
@@ -59,6 +60,7 @@ CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/PlaneRenderable.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Player.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Position.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/RenderableComponent.hpp
+CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/RenderableParticles.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/Resource.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/Cursed_Crown.dir/src/Player.cpp.o: ../include/System.h
@@ -95,6 +97,7 @@ CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Player.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Position.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/RenderSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/RenderableComponent.hpp
+CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/RenderableParticles.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Resource.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Scene.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/ShaderProgram.hpp
@@ -128,6 +131,7 @@ CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Player.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Position.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/RenderSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/RenderableComponent.hpp
+CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/RenderableParticles.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Resource.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Scene.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/ShaderProgram.hpp
