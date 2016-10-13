@@ -1,5 +1,6 @@
 # Distorted-Dungeon
 3D rogue like/platformer game in development
+Video demo : https://www.youtube.com/watch?v=81qiKl6DtH4
 
 ## What's been done for the moment ?
   The dungeon is generated procedurally using Kruskal's algorithm to find the minimum spanning tree of a graph composed of rooms as nodes. Edges give the corridors between rooms.
@@ -25,3 +26,5 @@
 * cmake ..
 * make -j
 * ./bin/Cursed_Crown
+
+
