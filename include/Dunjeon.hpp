@@ -220,7 +220,7 @@ class Dungeon {
 
 			std::vector<unsigned> rooms_id;
 			unsigned int inserted = 0;
-			unsigned int num_rooms_selected = 10;
+			unsigned int num_rooms_selected = 20;
 			while(inserted < num_rooms_selected) {
 				unsigned int k = std::rand() % m_rooms.size();
 				
@@ -266,7 +266,7 @@ class Dungeon {
 
 					for(unsigned int i = 0; i < 4; ++i) {
 						EntityPtr colonne = std::make_shared<Entity>();
-						RenderablePtr<MeshOBJ> colonne_render = std::make_shared<Renderable<MeshOBJ>>(shaders.get("textured"), "colonne", "wall");
+						RenderablePtr<MeshOBJ> colonne_render = std::make_shared<Renderable<MeshOBJ>>(shaders.get("textured"), "colonne", "colonne_tex");
 
 						colonne_render->scaleLocalMatrix(glm::vec3(0.25f, 0.25f, 0.25f));
 						colonne_render->translateHeritanceMatrix(glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z) + position_colonnes[i]);
@@ -274,6 +274,17 @@ class Dungeon {
 						RenderableComponentPtr render = std::make_shared<RenderableComponent>();
 						render->m_renderable = colonne_render;
 						colonne->addComponent<RenderableComponent>(render);
+
+						CollisablePtr<Cobble> col = std::make_shared<Collisable<Cobble>>();
+
+						//collisable->m_position_start = collisable->m_position;
+						col->m_size = getSizePositions(colonne_render, 0.25f);
+						col->m_position = glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z) + position_colonnes[i] - col->m_size/2.f;
+						col->m_box = std::make_shared<Renderable<Box>>(shaders.get("wireframe"),
+																			  col->m_position,
+																			  col->m_size,
+																			  glm::vec4(1.f, 1.f, 1.f, 1.f));
+						colonne->addComponent<Collisable<Cobble>>(col);
 
 						entity_manager.add(colonne);
 					}
@@ -301,7 +312,7 @@ class Dungeon {
 			tree.push_back(rooms_id[0]);
 			while(nearest_tree(rooms_id, tree, edges));
 
-			for(unsigned int i = 0; i < edges.size(); ++i) {
+			/*for(unsigned int i = 0; i < edges.size(); ++i) {
 				EntityPtr entity = std::make_shared<Entity>();
 
 				unsigned int k = edges[i].first;
@@ -321,7 +332,7 @@ class Dungeon {
 				entity->addComponent<RenderableComponent>(renderable_component);
 
 				entity_manager.add(entity);
-			}
+			}*/
 
 			// Computation of corridors between nodes of minimum tree
 			std::vector<std::pair<glm::vec2, glm::vec2>> corridors;
@@ -456,7 +467,7 @@ class Dungeon {
 				entity_manager.add(entity);
 			}
 
-			for(unsigned int j = 0; j < corridors.size(); ++j) {
+			/*for(unsigned int j = 0; j < corridors.size(); ++j) {
 				EntityPtr entity = std::make_shared<Entity>();
 				
 				//glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
@@ -473,7 +484,7 @@ class Dungeon {
 				entity->addComponent<RenderableComponent>(renderable_component);
 
 				entity_manager.add(entity);
-			}
+			}*/
 
 			// Walls around rooms generation
 			for(int index : rooms_id) {

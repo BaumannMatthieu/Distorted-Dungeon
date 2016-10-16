@@ -341,6 +341,8 @@ class Skybox {
 
 	static GLuint CreateBufferTexture() {
 		GLuint textureID;
+
+
 		glGenTextures(1, &textureID);
 		glActiveTexture(GL_TEXTURE0);
 
@@ -410,13 +412,13 @@ class Renderable<Skybox> : public Drawable {
 		    m_positions.push_back(glm::vec3(-0.5f, 0.5f, 0.5f));
 		    m_positions.push_back(glm::vec3(0.5f,-0.5f, 0.5f));
 
-		    for(unsigned int i = 0; i < m_positions.size(); ++i) {
+		    /*for(unsigned int i = 0; i < m_positions.size(); ++i) {
 		    	m_positions[i] *= glm::vec3(SIZE_TILE);
-		    }
+		    }*/
 
 						// Creation Vertex Buffer Objects
 			glGenBuffers(1, &m_vertex_buffer_positions_id);
-			glGenBuffers(1, &m_vertex_buffer_texcoords_id);
+			//glGenBuffers(1, &m_vertex_buffer_texcoords_id);
 			// Positions
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer_positions_id);
 			glBufferData(GL_ARRAY_BUFFER,
@@ -428,7 +430,7 @@ class Renderable<Skybox> : public Drawable {
 
 			m_textureID = Skybox::CreateBufferTexture();
 
-			scaleLocalMatrix(glm::vec3(SIZE_TILE));
+			scaleLocalMatrix(glm::vec3(20.f));
 		}
 
 		virtual ~Renderable() {
@@ -438,6 +440,7 @@ class Renderable<Skybox> : public Drawable {
 
 		void draw() {
 			int positionsAttributeIndex = m_shader->getAttributeLocation("in_position");
+			//int texCoordsAttributeIndex = m_shader->getAttributeLocation("in_texcoord");
 
 			int textureLocation = m_shader->getUniformLocation("skybox");
 
@@ -445,12 +448,16 @@ class Renderable<Skybox> : public Drawable {
 			glEnableVertexAttribArray(positionsAttributeIndex);
 			glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer_positions_id);
 			glVertexAttribPointer(positionsAttributeIndex, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+			//glEnableVertexAttribArray(texCoordsAttributeIndex);
+			//glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer_texcoords_id);
+			//glVertexAttribPointer(texCoordsAttributeIndex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
 			glDepthMask(GL_FALSE);
 			glActiveTexture(GL_TEXTURE0);
 	        glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
 	        glUniform1i(textureLocation, 0);
 			
-
 			DrawArrays();
 			glDepthMask(GL_TRUE);
 
@@ -458,7 +465,7 @@ class Renderable<Skybox> : public Drawable {
 		}
 
 		void DrawArrays() {
-			glDrawArrays(GL_TRIANGLES, 0, m_positions.size());
+			glDrawArrays(GL_QUADS, 0, m_positions.size());
 		}
 
 	private:

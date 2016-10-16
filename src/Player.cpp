@@ -3,6 +3,7 @@
 #include "../include/Player.hpp"
 #include "../include/Position.hpp"
 #include "../include/MovableComponent.hpp"
+#include "../include/CollisableComponent.hpp"
 #include "../include/Physicable.hpp"
 #include "../include/MagicSystem.hpp"
 #include "../include/Carryable.hpp"
@@ -16,7 +17,7 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 	unsigned int index = std::rand() % rooms.size();
 	MovablePtr movable = std::make_shared<Movable>();
 	movable->m_direction = camera->getDirection();
-	movable->m_position = glm::vec3(rooms[index].getCenter().x, 5.73f, rooms[index].getCenter().z);
+	movable->m_position = glm::vec3(rooms[index].getCenter().x, 30.73f, rooms[index].getCenter().z);
 	movable->m_speed = 0.f;
 	movable->m_quat = glm::quat(1.f, 0.f, 0.f, 0.f);
 	
@@ -39,7 +40,7 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 	CollisablePtr<Cobble> collisable = std::make_shared<Collisable<Cobble>>();
 
 	//collisable->m_position_start = collisable->m_position;
-	collisable->m_size = System<Collider>::getSizePositions(goblin_mesh, 0.1f);
+	collisable->m_size = getSizePositions(goblin_mesh, 0.1f);
 	collisable->m_position = movable->m_position - collisable->m_size/2.f;
 	collisable->m_box = std::make_shared<Renderable<Box>>(shaders.get("wireframe"),
 														  collisable->m_position,
@@ -48,9 +49,6 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 	m_entity->addComponent<Collisable<Cobble>>(collisable);
 
 	//System<Collider>::attachBoundingBoxCollision(m_entity, nullptr);
-
-
-
 
 	EntityPtr firebowl = std::make_shared<Entity>();
 	TriggerablePtr triggerable = std::make_shared<Triggerable>();
@@ -123,7 +121,7 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 	container->m_entitys.push_back(weapon);
 	m_entity->addComponent<Container>(container);
 
-	entity_manager.add(weapon);
+	//entity_manager.add(weapon);
 	entity_manager.add(m_entity);
 }
 

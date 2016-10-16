@@ -84,7 +84,7 @@ bool SetOpenGLAttributes()
 	// SDL_GL_CONTEXT_CORE gives us only the newer version, deprecated functions are disabled
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-	// 3.2 is part of the modern versions of OpenGL, but most video cards whould be able to run it
+	// 3.2 is part of the modern versions of OpenGL, but most video cards would be able to run it
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
@@ -111,14 +111,14 @@ int main(int argc, char *argv[])
 	glClear(GL_COLOR_BUFFER_BIT);
 	SDL_GL_SwapWindow(mainWindow);
 
-	textures.add("../data/textures/floor.bmp", "stone");
-	textures.add("../data/textures/wall.bmp", "wall");
-	textures.add("../data/textures/wall.bmp", "layout cube");
+	textures.add("../data/textures/floor.jpg", "stone");
+	textures.add("../data/textures/wall.jpg", "wall");
+	textures.add("../data/textures/wall.jpg", "layout cube");
 	textures.add("../data/textures/axe_uv.bmp", "layout axe");
 	textures.add("../data/textures/goblin-texture.bmp", "goblin");
-	textures.add("../data/textures/ward-texture.bmp", "ward-texture");
-	textures.add("../data/textures/smoke.bmp", "smoke");
-	textures.add("../data/textures/colonne_l.bmp", "colonne_l");
+	textures.add("../data/textures/ward-texture.jpg", "ward-texture");
+	textures.add("../data/textures/smoke.jpg", "smoke");
+	textures.add("../data/textures/colonne.jpg", "colonne_tex");
 
 	textures.add("../data/textures/front.bmp", "front");
 	textures.add("../data/textures/left.bmp", "left");

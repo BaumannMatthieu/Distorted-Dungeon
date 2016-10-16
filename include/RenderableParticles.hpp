@@ -133,7 +133,7 @@ class Renderable<ParticleSystem<Type>> : public Drawable, public std::enable_sha
 
 		void bindParticleSystem(const glm::vec3& position,
 				   				const glm::vec2& size) {
-			unsigned int num_particles = 25;
+			unsigned int num_particles = 10;
 
 			translateHeritanceMatrix(position);
 			m_particle_system = std::make_shared<ParticleSystem<Type>>(this->shared_from_this(),

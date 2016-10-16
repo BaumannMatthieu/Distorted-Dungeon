@@ -22,27 +22,32 @@
 
 Camera::Camera(Mode mode) : m_orientation(0.f),
 				   m_orientation_height(0.f),	
-				   m_position(glm::vec3(0, 35.f, 0)),
+				   m_position(glm::vec3(100.f, 100.f, 100.f)),
 				   //m_direction(glm::vec3(glm::cos(m_orientation), -0.2f, glm::sin(m_orientation))),
-				   m_direction(0.f, -1.f, 0.f),
+				   m_direction(1.f, 1.f, 0.f),
 				   m_up(glm::vec3(0.f, 1.f, 0.f)),
-				   m_screen(1920.f, 1080.f),
 				   m_mode(mode),
-				   m_state(FORWARD) {
+				   m_state(FORWARD),
+				   m_near(0.1f),
+				   m_far(500.f),
+				   m_a(1920.f/1080.f),
+				   m_fov(45.f),
+				   m_screen(1920.f, 1080.f) {
 	m_view = glm::lookAt
 	(
 	    m_position, // Camera is at ( 0, 0, -5), in World Space
-	    m_position + m_direction, // And looks at the center
+	    glm::vec3(0.f), // And looks at the center
 	    m_up  // Camera is upside-down
 	);
 	 
 	m_projection = glm::perspective
 	(
-	    45.0f,              		// 45º field of view
-	    m_screen.x / m_screen.y,  // 16:9 aspect ratio
-	    0.1f,               	// Only render what's 0.1 or more away from camera
-	    10000.0f              	// Only render what's 100 or less away from camera
+	    m_fov,              		// 45º field of view
+	    m_a,  // 16:9 aspect ratio
+	    m_near,               	// Only render what's 0.1 or more away from camera
+	    m_far              	// Only render what's 100 or less away from camera
 	);
+	update_frustum_view();
 }
 
 Camera::~Camera() {
@@ -251,5 +256,56 @@ void Camera::update() {
 		    m_position + m_direction, // And looks at the center
 		    m_up  // Camera is upside-down
 		);
+
+	if(m_mode == PLAYER) {
+		update_frustum_view();
+	}
+}
+
+void Camera::update_frustum_view() {
+	glm::vec3 right(m_view[0][0], m_view[1][0], m_view[2][0]);
+	glm::vec3 up(m_view[0][1], m_view[1][1], m_view[2][1]);
+	glm::vec3 forward(-m_view[0][2], -m_view[1][2], -m_view[2][2]);
+
+	glm::vec3 np(forward*m_near);
+	glm::vec3 fp(forward*m_far);
+
+	float HnearHalf = m_near*glm::tan(m_fov/2.f);
+	float WnearHalf = HnearHalf*m_a;
+
+	glm::vec3 m_left(np - right*WnearHalf);
+	glm::vec3 m_right(np + right*WnearHalf);
+	glm::vec3 m_top(np + up*HnearHalf);
+	glm::vec3 m_bottom(np - up*HnearHalf);
+	m_left = glm::normalize(m_left);
+	m_right = glm::normalize(m_right);
+	m_top = glm::normalize(m_top);
+	m_bottom = glm::normalize(m_bottom);
+
+	m_frustum.m_planes[FrustumView::NEAR].n = -forward;
+	m_frustum.m_planes[FrustumView::FAR].n = forward;
+	m_frustum.m_planes[FrustumView::LEFT].n = glm::cross(up, m_left);
+	m_frustum.m_planes[FrustumView::RIGHT].n = glm::cross(m_right, up);
+	m_frustum.m_planes[FrustumView::TOP].n = glm::cross(right, m_top);
+	m_frustum.m_planes[FrustumView::BOTTOM].n = glm::cross(m_bottom, right);
+
+	//std::cout << glm::length(m_frustum.m_planes[FrustumView::NEAR].n) << std::endl;
+	//std::cout << up.y << std::endl;
+	//std::cout << m_frustum.m_planes[FrustumView::TOP].n.x << " " << m_frustum.m_planes[FrustumView::TOP].n.y << " " << m_frustum.m_planes[FrustumView::TOP].n.z << std::endl;
+
+	compute_d_plane(m_position + np, m_frustum.m_planes[FrustumView::NEAR]);
+	compute_d_plane(m_position + fp, m_frustum.m_planes[FrustumView::FAR]);
+	compute_d_plane(m_position, m_frustum.m_planes[FrustumView::LEFT]);
+	compute_d_plane(m_position, m_frustum.m_planes[FrustumView::RIGHT]);
+	compute_d_plane(m_position, m_frustum.m_planes[FrustumView::TOP]);
+	compute_d_plane(m_position, m_frustum.m_planes[FrustumView::BOTTOM]);
+}
+
+void Camera::compute_d_plane(const glm::vec3& p, Plane& plane) {
+	plane.d = -glm::dot(plane.n, p);
+}
+
+const Camera::FrustumView& Camera::getFrustumView() const {
+	return m_frustum;
 }
 

@@ -74,6 +74,7 @@ CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o: ../src/Resource.cpp
 
 CMakeFiles/Cursed_Crown.dir/src/Room.cpp.o: ../src/Room.cpp
 
+CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/AI.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Camera.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Carryable.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/CollidedComponent.hpp
@@ -108,6 +109,7 @@ CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../src/Scene.cpp
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o: ../src/./../include/ShaderProgram.hpp
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
 
+CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/AI.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Camera.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Carryable.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/CollidedComponent.hpp

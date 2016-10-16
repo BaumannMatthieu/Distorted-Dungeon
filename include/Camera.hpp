@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <array>
 
 #include <GL/glew.h>
 
@@ -44,6 +45,34 @@ class Camera {
 		void update();
 
 	private:
+		void update_frustum_view();
+
+		
+
+	public:
+		struct Plane {
+			float 			d;
+			glm::vec3		n;	
+		};
+
+		void compute_d_plane(const glm::vec3& p, Plane& plane);
+
+		struct FrustumView {
+			enum {
+				NEAR, 
+				FAR, 
+				BOTTOM,
+				TOP,
+				LEFT,
+				RIGHT,
+			};
+
+			std::array<Plane, 6>		m_planes;
+		};
+
+		const FrustumView& getFrustumView() const;
+	private:
+
 		glm::mat4	m_view;
 		glm::mat4	m_projection;
 
@@ -53,13 +82,18 @@ class Camera {
 		glm::vec3 	m_direction;
 		glm::vec3 	m_up;
 
-		glm::vec2	m_screen;
-
 		Mode		m_mode;
 
 		PlayerPtr	m_player;
 		int 		m_state;
 		bool 		m_walk;
+
+		FrustumView m_frustum;
+		float		m_near, m_far;
+		float  		m_a;
+		float 		m_fov;
+
+		glm::vec2	m_screen;
 };
 
 using CameraPtr = std::shared_ptr<Camera>;

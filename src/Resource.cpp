@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "../include/Resource.hpp"
 #include "../include/MeshOBJRenderable.hpp"
 #include "../include/ShaderProgram.hpp"
@@ -12,7 +13,7 @@ std::shared_ptr<Type> Resources<Type>::load(const std::string& filename) {
 
 template<>
 std::shared_ptr<Texture> Resources<Texture>::load(const std::string& filename) {
-	Texture* tex = SDL_LoadBMP(filename.c_str());
+	Texture* tex = IMG_Load(filename.c_str());
 	if(tex == NULL) {
 		std::cerr << "Error when loading the texture at : " << filename << std::endl;
 		return nullptr;

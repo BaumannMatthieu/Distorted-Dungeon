@@ -15,26 +15,6 @@
 
 #include <glm/gtx/vector_angle.hpp>
 
-/*using Damage = struct Damage;
-using DamagePtr = std::shared_ptr<Damage>;
-
-struct Spell : public Component {
-	unsigned int	m_cost;
-
-	unsigned int	m_cooldown;
-	unsigned int	m_duration;
-};
-
-using Spell = struct Spell;
-using SpellPtr = std::shared_ptr<Spell>;
-
-struct Dot : public Component {
-	unsigned int	m_interval_time;
-};
-
-using Dot = struct Dot;
-using DotPtr = std::shared_ptr<Dot>;*/
-
 struct Caster : public Component {
 	unsigned int				m_mana;
 	unsigned int 				m_stamina;
@@ -88,10 +68,9 @@ class Magic {
 				const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
 				if(keystate[SDL_SCANCODE_SPACE]) {
-					std::cout << "FIREBOWL ! " << std::endl;
 					// Launch the spell
 					//createFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z));
-					createCircleFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z), 5);
+					createCircleFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z), 1);
 
 					caster->m_last_time[technic_selected_id] = SDL_GetTicks();
 				}
@@ -169,7 +148,6 @@ class Magic {
 										 unsigned int num_firebowl) {
 			float dtheta = 2*3.14f/num_firebowl; 
 
-			
 			glm::vec2 u(1.0f, 0.f);
 			glm::vec2 v(direction_entity.x, direction_entity.z);
 			v = glm::normalize(v);

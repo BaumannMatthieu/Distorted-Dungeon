@@ -333,6 +333,7 @@ bin/Cursed_Crown: CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o
 bin/Cursed_Crown: CMakeFiles/Cursed_Crown.dir/build.make
 bin/Cursed_Crown: /usr/lib/x86_64-linux-gnu/libSDL2main.a
 bin/Cursed_Crown: /usr/lib/x86_64-linux-gnu/libSDL2.so
+bin/Cursed_Crown: /usr/lib/x86_64-linux-gnu/libSDL2_image.so
 bin/Cursed_Crown: /usr/lib/x86_64-linux-gnu/libGLU.so
 bin/Cursed_Crown: /usr/lib/x86_64-linux-gnu/libGL.so
 bin/Cursed_Crown: /usr/lib/x86_64-linux-gnu/libGLEW.so

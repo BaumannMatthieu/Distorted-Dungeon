@@ -6,10 +6,32 @@
 
 #IncludeRegexTransform: 
 
+/home/matthieu/Programmation/Distorted-Dungeon/include/AI.hpp
+memory
+-
+glm/glm.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+../include/System.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/System.h
+../include/Entity.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/Entity.h
+../include/Component.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
+../include/MovableComponent.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/MovableComponent.hpp
+../include/CollisableComponent.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/CollisableComponent.hpp
+../include/MotionSystem.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/MotionSystem.hpp
+
 /home/matthieu/Programmation/Distorted-Dungeon/include/Camera.hpp
 vector
 -
 memory
+-
+array
 -
 GL/glew.h
 -
@@ -93,6 +115,10 @@ vector
 -
 memory
 -
+map
+-
+set
+-
 ../include/System.h
 /home/matthieu/Programmation/Distorted-Dungeon/include/System.h
 ../include/Entity.h
@@ -119,6 +145,8 @@ glm/gtc/type_ptr.hpp
 -
 ../include/Component.h
 /home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
+../include/renderable.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/renderable.hpp
 
 /home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
 
@@ -419,6 +447,8 @@ glm/gtc/type_ptr.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/PhysicSystem.hpp
 ../include/MotionSystem.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/MotionSystem.hpp
+../include/AI.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/AI.hpp
 ../include/Carryable.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/Carryable.hpp
 
@@ -591,6 +621,8 @@ vector
 /home/matthieu/Programmation/Distorted-Dungeon/include/Position.hpp
 ../include/MovableComponent.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/MovableComponent.hpp
+../include/CollisableComponent.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/CollisableComponent.hpp
 ../include/Physicable.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/Physicable.hpp
 ../include/MagicSystem.hpp
@@ -604,6 +636,8 @@ vector
 iostream
 -
 SDL2/SDL.h
+-
+SDL2/SDL_image.h
 -
 ../include/Resource.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/Resource.hpp

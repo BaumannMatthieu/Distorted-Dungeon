@@ -19,6 +19,7 @@
 #include "../include/MagicSystem.hpp"
 #include "../include/PhysicSystem.hpp"
 #include "../include/MotionSystem.hpp"
+#include "../include/AI.hpp"
 #include "../include/Carryable.hpp"
 
 class Scene {
@@ -41,6 +42,7 @@ class Scene {
 		System<PhysicManager>		m_physic;
 		System<MotionManager>		m_motion;
 		System<Interaction>			m_interaction;
+		System<AISystem>			m_ai;
 
 		GLuint 						m_vertex_array_id;
 };
