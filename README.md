@@ -21,6 +21,7 @@ Youtube video demo : https://www.youtube.com/watch?v=81qiKl6DtH4
  * ZQSD : Displacement
 
 ## How to build the game :
+* rm -r build
 * mkdir build
 * cd build
 * cmake ..
