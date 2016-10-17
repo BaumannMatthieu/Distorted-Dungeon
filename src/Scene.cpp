@@ -35,7 +35,7 @@ void createAICharacter(const DungeonPtr dungeon, EntityManager& entity_manager) 
 	// Determining beginning position
 	MovablePtr movable = std::make_shared<Movable>();
 	movable->m_direction = camera->getDirection();
-	movable->m_position = glm::vec3(rooms[index].getCenter().x, 5.73f, rooms[index].getCenter().z);
+	movable->m_position = glm::vec3(rooms[index].getCenter().x, 0.f, rooms[index].getCenter().z);
 	movable->m_speed = 0.f;
 	movable->m_quat = glm::quat(1.f, 0.f, 0.f, 0.f);
 	
@@ -70,7 +70,7 @@ void createAICharacter(const DungeonPtr dungeon, EntityManager& entity_manager) 
 	entity->addComponent<AI>(ai);
 
 	PhysicPtr physic = std::make_shared<Physic>();
-	physic->m_gravity = 1.0f;
+	physic->m_gravity = 0.0f;
 	physic->m_mass = 15.f;
 	physic->m_jump = false;
 	entity->addComponent<Physic>(physic);
@@ -122,12 +122,8 @@ Scene::Scene() {
 	m_entitys.add(grunt);*/
 
 	//Skybox
-	EntityPtr sky = std::make_shared<Entity>();
-	RenderablePtr<Skybox> skybox = std::make_shared<Renderable<Skybox>>(shaders.get("skybox"));
-	RenderableComponentPtr cubemap = std::make_shared<RenderableComponent>();
-	cubemap->m_renderable = skybox;
-	sky->addComponent<RenderableComponent>(cubemap);
-	m_entitys.add(sky);
+	m_skybox = std::make_shared<Renderable<Skybox>>(shaders.get("skybox"));
+	//m_skybox->scaleHeritanceMatrix(glm::vec3(20.f));
 
 	EntityPtr b = std::make_shared<Entity>();
 	RenderablePtr<Box> bb = std::make_shared<Renderable<Box>>(shaders.get("wireframe"), 
@@ -161,6 +157,8 @@ Scene::Scene() {
 	m_interaction.setPlayer(m_player->getEntity());
 	m_motion.setPlayer(m_player->getEntity());
 	m_ai.setPlayer(m_player->getEntity());
+
+	m_renderer.setSkybox(m_skybox);
 
 	unsigned int num_platform = 5;
 

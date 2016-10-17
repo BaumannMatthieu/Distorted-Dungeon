@@ -27,7 +27,7 @@ public:
 		std::vector<EntityPtr> AIEntitys = EntityManager::getEntitysByComponent<AI>(entitys);
 		for(auto& entity : AIEntitys) {
 			MovablePtr movable_ai = entity->getComponent<Movable>();
-			glm::vec3 distance = movable->m_position - movable_ai->m_position;
+			glm::vec3 distance = (movable->m_position - movable_ai->m_position)*glm::vec3(1.f, 0.f, 1.f);
 			float distance_norme = glm::length(distance);
 
 			movable_ai->m_speed = 0.f;

@@ -17,7 +17,7 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 	unsigned int index = std::rand() % rooms.size();
 	MovablePtr movable = std::make_shared<Movable>();
 	movable->m_direction = camera->getDirection();
-	movable->m_position = glm::vec3(rooms[index].getCenter().x, 30.73f, rooms[index].getCenter().z);
+	movable->m_position = glm::vec3(rooms[index].getCenter().x, 0.f, rooms[index].getCenter().z);
 	movable->m_speed = 0.f;
 	movable->m_quat = glm::quat(1.f, 0.f, 0.f, 0.f);
 	
@@ -66,7 +66,7 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 
 	
 	PhysicPtr physic = std::make_shared<Physic>();
-	physic->m_gravity = 5.0f;
+	physic->m_gravity = 0.0f;
 	physic->m_mass = 15.f;
 	physic->m_jump = false;
 	m_entity->addComponent<Physic>(physic);

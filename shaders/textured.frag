@@ -28,7 +28,7 @@ struct PointLight {
 
 uniform Material material;
 
-#define MAX_NUM_LIGHTS 50
+#define MAX_NUM_LIGHTS 70
 uniform PointLight light[MAX_NUM_LIGHTS];
 
 uniform int num_lights;

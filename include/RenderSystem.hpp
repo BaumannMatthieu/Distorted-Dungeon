@@ -15,6 +15,9 @@ class Render {
 	void run(std::vector<EntityPtr>& entitys) {
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+		skybox_render();
 	
 		std::vector<EntityPtr> point_lights_entitys = EntityManager::getEntitysByComponent<Light<Ponctual>>(entitys);
 		std::vector<EntityPtr> renderable_entitys = EntityManager::getEntitysByComponent<RenderableComponent>(entitys);
@@ -68,6 +71,25 @@ class Render {
         }
 	}
 
+	void skybox_render() {
+
+		m_skybox->setLocalMatrix(glm::translate(camera->getPosition()));
+
+		ShaderProgramPtr shader = m_skybox->getShaderProgram();
+		
+		shader->bind();
+
+		int viewLocation = shader->getUniformLocation("view");
+		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(camera->getMatrixView()));
+		
+		int projectionLocation = shader->getUniformLocation("projection");
+		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(camera->getMatrixProjection()));
+
+		m_skybox->draw();
+
+		shader->unbind();
+	}
+
 	void deleteOutsideFrustumView(std::vector<EntityPtr>& entitys) {
 		const Camera::FrustumView& frustum = camera->getFrustumView();
 		std::vector<EntityPtr> inside_frustum_entitys;
@@ -108,10 +130,18 @@ class Render {
 				}
 			}
 		}
+
 		return true;
 	}
 
 	bool point_inside(const glm::vec3& p, const Camera::Plane& plane) {
 		return (glm::dot(plane.n, p) + plane.d >= 0.f);
 	}
+
+	void setSkybox(const RenderablePtr<Skybox> skybox) {
+		m_skybox = skybox;
+	}
+
+	private:
+		RenderablePtr<Skybox> m_skybox;
 };

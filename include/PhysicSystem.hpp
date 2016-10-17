@@ -36,6 +36,7 @@ class PhysicManager {
 					}
 					
 					physic->m_jump = true;
+					physic->m_gravity = 9.81f;
 				}	
 			}
 

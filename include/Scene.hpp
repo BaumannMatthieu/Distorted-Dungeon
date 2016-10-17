@@ -34,6 +34,7 @@ class Scene {
 
 		PlayerPtr					m_player;
 		DungeonPtr					m_dungeon;
+		RenderablePtr<Skybox>		m_skybox;
 
 		System<Render>				m_renderer;
 		System<Collider>			m_collider;

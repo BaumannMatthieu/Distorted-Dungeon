@@ -334,14 +334,9 @@ class Renderable : public Drawable {
 		Material					m_material;
 };
 
-class Skybox {
-	public:
-	Skybox() {}
-	~Skybox() {}
-
+struct Skybox : public Component {
 	static GLuint CreateBufferTexture() {
 		GLuint textureID;
-
 
 		glGenTextures(1, &textureID);
 		glActiveTexture(GL_TEXTURE0);
@@ -357,7 +352,7 @@ class Skybox {
 		images[5] = textures.get("front");
 
 		for(unsigned int i = 0; i < images.size(); ++i) {
-			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, 3, images[i]->w, images[i]->h, 0, GL_BGR, GL_UNSIGNED_BYTE, images[i]->pixels);
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, images[i]->w, images[i]->h, 0, GL_BGR, GL_UNSIGNED_BYTE, images[i]->pixels);
 		}
 
 	    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -430,7 +425,7 @@ class Renderable<Skybox> : public Drawable {
 
 			m_textureID = Skybox::CreateBufferTexture();
 
-			scaleLocalMatrix(glm::vec3(20.f));
+			scaleLocalMatrix(glm::vec3(SIZE_TILE));
 		}
 
 		virtual ~Renderable() {
@@ -441,6 +436,10 @@ class Renderable<Skybox> : public Drawable {
 		void draw() {
 			int positionsAttributeIndex = m_shader->getAttributeLocation("in_position");
 			//int texCoordsAttributeIndex = m_shader->getAttributeLocation("in_texcoord");
+
+			int modelLocation = m_shader->getUniformLocation("model");
+			computeModelMatrix();
+			glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(m_model));
 
 			int textureLocation = m_shader->getUniformLocation("skybox");
 
@@ -457,7 +456,6 @@ class Renderable<Skybox> : public Drawable {
 			glActiveTexture(GL_TEXTURE0);
 	        glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
 	        glUniform1i(textureLocation, 0);
-			
 			DrawArrays();
 			glDepthMask(GL_TRUE);
 
@@ -465,7 +463,7 @@ class Renderable<Skybox> : public Drawable {
 		}
 
 		void DrawArrays() {
-			glDrawArrays(GL_QUADS, 0, m_positions.size());
+			glDrawArrays(GL_TRIANGLES, 0, m_positions.size());
 		}
 
 	private:

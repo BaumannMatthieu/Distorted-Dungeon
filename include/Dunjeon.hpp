@@ -220,7 +220,7 @@ class Dungeon {
 
 			std::vector<unsigned> rooms_id;
 			unsigned int inserted = 0;
-			unsigned int num_rooms_selected = 20;
+			unsigned int num_rooms_selected = 40;
 			while(inserted < num_rooms_selected) {
 				unsigned int k = std::rand() % m_rooms.size();
 				
@@ -268,6 +268,7 @@ class Dungeon {
 						EntityPtr colonne = std::make_shared<Entity>();
 						RenderablePtr<MeshOBJ> colonne_render = std::make_shared<Renderable<MeshOBJ>>(shaders.get("textured"), "colonne", "colonne_tex");
 
+						//colonne_render->scaleLocalMatrix(glm::vec3(1.0f, 0.f, 1.f));
 						colonne_render->scaleLocalMatrix(glm::vec3(0.25f, 0.25f, 0.25f));
 						colonne_render->translateHeritanceMatrix(glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z) + position_colonnes[i]);
 						
@@ -279,7 +280,7 @@ class Dungeon {
 
 						//collisable->m_position_start = collisable->m_position;
 						col->m_size = getSizePositions(colonne_render, 0.25f);
-						col->m_position = glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z) + position_colonnes[i] - col->m_size/2.f;
+						col->m_position = glm::vec3(m_rooms[k].getCenter().x, 0.f, m_rooms[k].getCenter().z) + position_colonnes[i] - glm::vec3(1.f, 0.f, 1.f)*col->m_size/2.f;
 						col->m_box = std::make_shared<Renderable<Box>>(shaders.get("wireframe"),
 																			  col->m_position,
 																			  col->m_size,
@@ -445,7 +446,7 @@ class Dungeon {
 				//glm::vec3 scale(SIZE_TILE, 0.f, SIZE_TILE);
 				glm::vec3 translate(tiles_corridors[j].first, 0.f, tiles_corridors[j].second);
 				
-				//tile->scaleLocalMatrix(glm::vec3(1.f));
+				//tile_render->scaleLocalMatrix(glm::vec3(1.f));
 				tile_render->scaleLocalMatrix(glm::vec3(1.0f, 0.f, 1.0f));
 				tile_render->translateLocalMatrix(translate + glm::vec3(0.5f, 0.f, 0.5f));
 				//tile_render->scaleTexCoords(glm::vec2(1.0f));

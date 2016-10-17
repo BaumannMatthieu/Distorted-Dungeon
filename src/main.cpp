@@ -120,12 +120,12 @@ int main(int argc, char *argv[])
 	textures.add("../data/textures/smoke.jpg", "smoke");
 	textures.add("../data/textures/colonne.jpg", "colonne_tex");
 
-	textures.add("../data/textures/front.bmp", "front");
-	textures.add("../data/textures/left.bmp", "left");
-	textures.add("../data/textures/right.bmp", "right");
-	textures.add("../data/textures/back.bmp", "back");
-	textures.add("../data/textures/top.bmp", "top");
-	textures.add("../data/textures/bottom.bmp", "bottom");
+	textures.add("../data/textures/ulukai/corona_ft.png", "front");
+	textures.add("../data/textures/ulukai/corona_lf.png", "left");
+	textures.add("../data/textures/ulukai/corona_rt.png", "right");
+	textures.add("../data/textures/ulukai/corona_bk.png", "back");
+	textures.add("../data/textures/ulukai/corona_up.png", "top");
+	textures.add("../data/textures/ulukai/corona_dn.png", "bottom");
 
 	meshes.add("../data/meshes/cube.obj", "cube");
 	meshes.add("../data/meshes/axe.obj", "axe");
@@ -154,6 +154,8 @@ void RunGame()
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+
+	//glEnable( GL_MULTISAMPLE );
 
 	while (loop)
 	{

@@ -66,6 +66,10 @@ const glm::vec3& Camera::getDirection() const {
 	return m_direction;
 }
 
+const glm::vec3& Camera::getPosition() const {
+	return m_position;
+}
+
 void Camera::setMode(Mode mode) {
 	m_mode = mode;
 }
@@ -257,9 +261,9 @@ void Camera::update() {
 		    m_up  // Camera is upside-down
 		);
 
-	if(m_mode == PLAYER) {
+	//if(m_mode == PLAYER) {
 		update_frustum_view();
-	}
+	//}
 }
 
 void Camera::update_frustum_view() {

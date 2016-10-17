@@ -79,11 +79,20 @@ class Collided {
 											delta.z *= -1.f; 
 										}
 
+
+
 										movable->m_position += delta;
 										box_entity->m_position += delta;
 
+										PhysicPtr physic = entity->getComponent<Physic>();
+										if(physic != nullptr && physic->m_gravity > 0.f && delta.y > 0.f) {
+											physic->m_gravity = 0.f;
+										}
+
 										box_entity->m_box->translateLocalMatrix(delta);
 										movable->m_heritance = glm::translate(movable->m_heritance, delta*glm::vec3(SIZE_TILE));
+
+
 
 										RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
 										if(renderable != nullptr) {

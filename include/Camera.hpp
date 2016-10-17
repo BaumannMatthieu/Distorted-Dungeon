@@ -36,6 +36,7 @@ class Camera {
 		const glm::mat4& getMatrixView() const;
 		const glm::mat4& getMatrixProjection() const;
 		const glm::vec3& getDirection() const;
+		const glm::vec3& getPosition() const;
 		int getState() const;
 
 		void setMode(Mode mode);
