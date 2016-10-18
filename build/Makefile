@@ -162,6 +162,30 @@ src/CubeRenderable.cpp.s:
 	$(MAKE) -f CMakeFiles/Cursed_Crown.dir/build.make CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.s
 .PHONY : src/CubeRenderable.cpp.s
 
+src/Dunjeon.o: src/Dunjeon.cpp.o
+.PHONY : src/Dunjeon.o
+
+# target to build an object file
+src/Dunjeon.cpp.o:
+	$(MAKE) -f CMakeFiles/Cursed_Crown.dir/build.make CMakeFiles/Cursed_Crown.dir/src/Dunjeon.cpp.o
+.PHONY : src/Dunjeon.cpp.o
+
+src/Dunjeon.i: src/Dunjeon.cpp.i
+.PHONY : src/Dunjeon.i
+
+# target to preprocess a source file
+src/Dunjeon.cpp.i:
+	$(MAKE) -f CMakeFiles/Cursed_Crown.dir/build.make CMakeFiles/Cursed_Crown.dir/src/Dunjeon.cpp.i
+.PHONY : src/Dunjeon.cpp.i
+
+src/Dunjeon.s: src/Dunjeon.cpp.s
+.PHONY : src/Dunjeon.s
+
+# target to generate assembly for a file
+src/Dunjeon.cpp.s:
+	$(MAKE) -f CMakeFiles/Cursed_Crown.dir/build.make CMakeFiles/Cursed_Crown.dir/src/Dunjeon.cpp.s
+.PHONY : src/Dunjeon.cpp.s
+
 src/LineRenderable.o: src/LineRenderable.cpp.o
 .PHONY : src/LineRenderable.o
 
@@ -393,6 +417,9 @@ help:
 	@echo "... src/CubeRenderable.o"
 	@echo "... src/CubeRenderable.i"
 	@echo "... src/CubeRenderable.s"
+	@echo "... src/Dunjeon.o"
+	@echo "... src/Dunjeon.i"
+	@echo "... src/Dunjeon.s"
 	@echo "... src/LineRenderable.o"
 	@echo "... src/LineRenderable.i"
 	@echo "... src/LineRenderable.s"

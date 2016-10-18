@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Cursed_Crown.dir/src/Resource.cpp.o"
   "CMakeFiles/Cursed_Crown.dir/src/CubeRenderable.cpp.o"
   "CMakeFiles/Cursed_Crown.dir/src/Camera.cpp.o"
+  "CMakeFiles/Cursed_Crown.dir/src/Dunjeon.cpp.o"
   "CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o"
   "CMakeFiles/Cursed_Crown.dir/src/LineRenderable.cpp.o"
   "bin/Cursed_Crown.pdb"
