@@ -51,11 +51,14 @@ using EquippedPtr = std::shared_ptr<Equipped>;
 using CarriedPtr = std::shared_ptr<Carried>;
 using ContainerPtr = std::shared_ptr<Container>;
 
+struct Effect;
+using EffectPtr = std::shared_ptr<Effect>;
+
 struct Effect {
-	std::function<void (EntityPtr)>			m_script;
+	std::function<void (EffectPtr, EntityPtr)>			m_script;
 };
 
-using EffectPtr = std::shared_ptr<Effect>;
+
 
 struct Speed : public Effect {
 	float							m_speed_factor;
@@ -88,8 +91,8 @@ struct EffectCollided : public Component {
 using EffectCollidedPtr = std::shared_ptr<EffectCollided>;
 
 struct Killable : public Component {
-	unsigned int 		m_life;
-	unsigned int 		m_defense;
+	float 		m_life;
+	float 		m_defense;
 };
 
 using KillablePtr = std::shared_ptr<Killable>;

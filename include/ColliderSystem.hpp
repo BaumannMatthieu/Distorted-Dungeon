@@ -135,8 +135,6 @@ class HashMapCollisable {
 
 		partitions.insert(getPartition(p.m_position + p.m_size));
 
-		//std::cout << "num partitions : " << partitions.size() << std::endl;
-
 		return partitions;
 	}
 
@@ -162,15 +160,18 @@ class Collider {
 		void run(std::vector<EntityPtr>& entitys) {
 			std::vector<EntityPtr> MovableEntitys = EntityManager::getEntitysByComponent<Movable>(entitys);
 			//std::cout << "esf " << MovableEntitys.size() << std::endl;
-
 			for(auto& entity : MovableEntitys) {
+
+				update_hashmap_movable(entity);
+
 				if(entity->getComponent<CollidedComponent>() != nullptr) {
 					continue;
 				}
 
 				MovablePtr movable = entity->getComponent<Movable>();
 
-				for(auto& entity_collision : m_hashmap->getNearestEntitys(entity)) {
+				//for(auto& entity_collision : m_hashmap->getNearestEntitys(entity)) {
+				for(auto& entity_collision : entitys) {
 					bool collision = false;
 					if(entity_collision != entity) {
 						// Collisable Square
@@ -337,6 +338,11 @@ class Collider {
 		void initialize_hashmap(std::vector<EntityPtr>& entitys) {
 			m_hashmap = std::make_shared<HashMapCollisable>(entitys);
 			m_hashmap->addRenderableGrid(entitys);
+		}
+
+		void update_hashmap_movable(const EntityPtr entity) {
+			m_hashmap->erase(entity);
+			m_hashmap->insert(entity);
 		}
 	private:
 	

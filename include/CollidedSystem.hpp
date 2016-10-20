@@ -19,7 +19,7 @@
 class Collided {
 	public:
 		void run(std::vector<EntityPtr>& entitys) {
-			std::vector<EntityPtr> erase;
+			std::vector<EntityPtr> erase, damaged;
 			for(auto& entity : entitys) {
 				if(entity->getComponent<Movable>() != nullptr) {
 					CollidedPtr collided = entity->getComponent<CollidedComponent>();
@@ -27,7 +27,7 @@ class Collided {
 					if(collided != nullptr) {
 						for(auto& opponent : collided->m_entitys) {
 							// If the opponent is a fixed world object then we just block the entity 
-							if(opponent->getComponent<Movable>() == nullptr) {
+							//if(opponent->getComponent<Movable>() == nullptr) {
 								CarriedPtr carried = opponent->getComponent<Carried>();
 								if(carried != nullptr) {
 									// If the carried entity is in collision with its owner then we do not manage the collision
@@ -42,16 +42,31 @@ class Collided {
 								CollisablePtr<Cobble> box_entity = entity->getComponent<Collisable<Cobble>>();
 
 								if(box_opponent != nullptr && box_entity != nullptr) {
-									TriggerablePtr throwable = entity->getComponent<Triggerable>();
-									if(throwable != nullptr) {
-										if(opponent != throwable->m_thrower) {
+									TriggerablePtr throwable_entity = entity->getComponent<Triggerable>();
+									TriggerablePtr throwable_opponent = opponent->getComponent<Triggerable>();
+									if(throwable_entity != nullptr && std::find(damaged.begin(), damaged.end(), opponent) == damaged.end()) {
+										if(opponent != throwable_entity->m_thrower) {
 											KillablePtr opponent_life = opponent->getComponent<Killable>();
+
 											if(opponent_life != nullptr) {
+												//std::cout << "damage !" << std::endl;
 												EffectCollidedPtr effect = entity->getComponent<EffectCollided>();
 												effectCollided(effect, opponent);
+												damaged.push_back(opponent);
 											}
-
 											erase.push_back(entity);
+										}
+									} else if(throwable_opponent != nullptr && std::find(damaged.begin(), damaged.end(), entity) == damaged.end()) {
+										if(entity != throwable_opponent->m_thrower) {
+											KillablePtr entity_life = entity->getComponent<Killable>();
+
+											if(entity_life != nullptr) {
+												//std::cout << "damage !" << std::endl;
+												EffectCollidedPtr effect = opponent->getComponent<EffectCollided>();
+												effectCollided(effect, entity);
+												damaged.push_back(entity);
+											}
+											erase.push_back(opponent);
 										}
 									} else {
 										glm::vec3 overlap = getOverlapVector(box_opponent, box_entity);
@@ -101,7 +116,7 @@ class Collided {
 										motion->m_first_to_second = not motion->m_first_to_second;
 									}
 								}
-							}
+							//}
 
 							//collided->m_entitys.erase(opponent);
 							CollidedPtr collided_opponent = opponent->getComponent<CollidedComponent>();
@@ -117,6 +132,13 @@ class Collided {
 					}
 				}
 	        }
+			for(auto entity : damaged) {
+	        	KillablePtr life = entity->getComponent<Killable>();
+	        	if(life->m_life <= 0) {
+	        		std::cout << life->m_life << std::endl;
+	        		erase.push_back(entity);
+	        	}
+	        }
 
 	        for(auto entity : erase) {
 	        	std::vector<EntityPtr>::iterator it = std::find(entitys.begin(), entitys.end(), entity);
@@ -128,7 +150,7 @@ class Collided {
 
 		void effectCollided(const EffectCollidedPtr effects, EntityPtr opponent) {
 			for(auto& effect : effects->m_effects) {
-				effect->m_script(opponent);
+				effect->m_script(effect, opponent);
 			} 
 		}
 

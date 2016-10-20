@@ -69,6 +69,11 @@ void createAICharacter(const DungeonPtr dungeon, EntityManager& entity_manager) 
 	AIPtr ai = std::make_shared<AI>();
 	entity->addComponent<AI>(ai);
 
+	KillablePtr life = std::make_shared<Killable>();
+	life->m_defense = 10.f;
+	life->m_life = 100.f;
+	entity->addComponent<Killable>(life);
+
 	PhysicPtr physic = std::make_shared<Physic>();
 	physic->m_gravity = 0.0f;
 	physic->m_mass = 15.f;
@@ -79,7 +84,7 @@ void createAICharacter(const DungeonPtr dungeon, EntityManager& entity_manager) 
 }
 
 Scene::Scene() {
-	m_dungeon = std::make_shared<Dungeon>(generator, 100, m_entitys);
+	m_dungeon = std::make_shared<Dungeon>(generator, 20, m_entitys);
 	m_player = std::make_shared<Player>(m_dungeon, m_entitys);
 
 	ShaderProgramPtr textured = std::make_shared<ShaderProgram>("../shaders/textured.vert", "../shaders/textured.frag");

@@ -96,9 +96,14 @@ class Magic {
 
 			DamagePtr direct_damage = std::make_shared<Damage>();
 			direct_damage->m_damage = 20;
-			direct_damage->m_script = [&direct_damage](EntityPtr opponent) {
+			direct_damage->m_script = [](EffectPtr effet, EntityPtr opponent) {
 				KillablePtr status = opponent->getComponent<Killable>();
-				status->m_life -= direct_damage->m_damage;
+				DamagePtr direct_damage = std::static_pointer_cast<Damage>(effet);
+				float damage = (direct_damage->m_damage - status->m_defense);
+
+				if(damage > 0.f) {
+					status->m_life -= damage;
+				}
 			};
 
 			EffectCollidedPtr effect = std::make_shared<EffectCollided>();
