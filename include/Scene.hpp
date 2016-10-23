@@ -21,13 +21,17 @@
 #include "../include/MotionSystem.hpp"
 #include "../include/AI.hpp"
 #include "../include/Carryable.hpp"
+#include "../include/HUD.hpp"
 
 class Scene {
 	public:
 		Scene();
 		~Scene();
 
-		void run();
+		bool run(bool pause);
+
+	private:
+		bool isPlayerDead() const;
 
 	private:
 		EntityManager				m_entitys;
@@ -44,6 +48,9 @@ class Scene {
 		System<MotionManager>		m_motion;
 		System<Interaction>			m_interaction;
 		System<AISystem>			m_ai;
+		HUDPtr						m_gui;
 
 		GLuint 						m_vertex_array_id;
 };
+
+using ScenePtr = std::shared_ptr<Scene>;

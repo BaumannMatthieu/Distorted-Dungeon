@@ -4,10 +4,14 @@
 in vec2 tx;
 in float life_factor;
 
+
 out vec4 color;
 
 uniform sampler2D texSampler;
+uniform vec4 color_particle;
 
 void main(void) {
-    color = glm::vec4(1.0f, life_factor/2.f, 0.f, life_factor)*texture(texSampler, tx);
+	vec4 color_center_fireball = vec4(1.f, 1.f, 0.f, 1.f);
+	vec4 final_color = mix(color_particle, color_center_fireball, life_factor);
+    color = final_color*texture(texSampler, tx);
 }

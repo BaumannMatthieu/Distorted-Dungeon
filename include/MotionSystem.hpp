@@ -92,7 +92,7 @@ class MotionManager {
 						render->m_renderable->setHeritanceMatrix(motion_rotate->m_heritance*glm::toMat4(quat));
 					}
 
-					CollisablePtr<Cobble> collisable = entity->getComponent<Collisable<Cobble>>();
+					/*CollisablePtr<Cobble> collisable = entity->getComponent<Collisable<Cobble>>();
 					if(collisable != nullptr) {
 						//DrawablePtr parent = render->m_renderable->getParent();
 						//RenderableComponentPtr render_player = m_player->getComponent<RenderableComponent>();
@@ -103,7 +103,7 @@ class MotionManager {
 						//CollisablePtr<Cobble> col = entity->getComponent<Collisable<Cobble>>();
 						//col->m_box->setParent(render_player->m_renderable);
 						//collisable->m_box->setLocalMatrix(motion_rotate->m_local*glm::toMat4(quat));
-					}
+					}*/
 				}
 	        }
 		}

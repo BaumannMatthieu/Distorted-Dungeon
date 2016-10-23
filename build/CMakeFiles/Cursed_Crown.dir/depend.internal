@@ -106,9 +106,11 @@ CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o
  /home/matthieu/Programmation/Distorted-Dungeon/include/ColliderSystem.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/CollisableComponent.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
+ /home/matthieu/Programmation/Distorted-Dungeon/include/Config.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Dunjeon.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Entity.h
  /home/matthieu/Programmation/Distorted-Dungeon/include/EntityManager.h
+ /home/matthieu/Programmation/Distorted-Dungeon/include/HUD.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Light.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/LineRenderable.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/MagicSystem.hpp
@@ -123,12 +125,15 @@ CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o
  /home/matthieu/Programmation/Distorted-Dungeon/include/RenderSystem.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/RenderableComponent.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/RenderableParticles.hpp
+ /home/matthieu/Programmation/Distorted-Dungeon/include/RenderableText.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Resource.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Scene.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/ShaderProgram.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/System.h
  /home/matthieu/Programmation/Distorted-Dungeon/include/renderable.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/src/Scene.cpp
+ /usr/include/freetype2/config/ftheader.h
+ /usr/include/freetype2/ft2build.h
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o
  /home/matthieu/Programmation/Distorted-Dungeon/src/./../include/ShaderProgram.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/src/ShaderProgram.cpp
@@ -141,9 +146,11 @@ CMakeFiles/Cursed_Crown.dir/src/main.cpp.o
  /home/matthieu/Programmation/Distorted-Dungeon/include/ColliderSystem.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/CollisableComponent.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
+ /home/matthieu/Programmation/Distorted-Dungeon/include/Config.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Dunjeon.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Entity.h
  /home/matthieu/Programmation/Distorted-Dungeon/include/EntityManager.h
+ /home/matthieu/Programmation/Distorted-Dungeon/include/HUD.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Light.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/LineRenderable.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/MagicSystem.hpp
@@ -158,9 +165,12 @@ CMakeFiles/Cursed_Crown.dir/src/main.cpp.o
  /home/matthieu/Programmation/Distorted-Dungeon/include/RenderSystem.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/RenderableComponent.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/RenderableParticles.hpp
+ /home/matthieu/Programmation/Distorted-Dungeon/include/RenderableText.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Resource.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/Scene.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/ShaderProgram.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/include/System.h
  /home/matthieu/Programmation/Distorted-Dungeon/include/renderable.hpp
  /home/matthieu/Programmation/Distorted-Dungeon/src/main.cpp
+ /usr/include/freetype2/config/ftheader.h
+ /usr/include/freetype2/ft2build.h

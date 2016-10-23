@@ -24,6 +24,7 @@
 #include "../include/Dunjeon.hpp"
 #include "../include/Light.hpp"
 #include "../include/Player.hpp"
+#include "../include/HUD.hpp"
 
 static std::default_random_engine generator;
 
@@ -70,7 +71,7 @@ void createAICharacter(const DungeonPtr dungeon, EntityManager& entity_manager) 
 	entity->addComponent<AI>(ai);
 
 	KillablePtr life = std::make_shared<Killable>();
-	life->m_defense = 10.f;
+	life->m_defense = 0.f;
 	life->m_life = 100.f;
 	entity->addComponent<Killable>(life);
 
@@ -79,6 +80,20 @@ void createAICharacter(const DungeonPtr dungeon, EntityManager& entity_manager) 
 	physic->m_mass = 15.f;
 	physic->m_jump = false;
 	entity->addComponent<Physic>(physic);
+
+	EntityPtr firebowl = std::make_shared<Entity>();
+	TriggerablePtr triggerable = std::make_shared<Triggerable>();
+	triggerable->m_mana_cost = 20;
+	triggerable->m_stamina_cost = 0;
+	triggerable->m_cooldown = 500;
+	triggerable->m_duration = 0;
+	firebowl->addComponent<Triggerable>(triggerable);
+
+	CasterPtr caster = std::make_shared<Caster>();
+	caster->m_selected_technic = 0;
+	caster->m_entitys.push_back(firebowl);
+	caster->m_last_time.push_back(SDL_GetTicks());
+	entity->addComponent<Caster>(caster);
 
 	entity_manager.add(entity);
 }
@@ -154,6 +169,8 @@ Scene::Scene() {
 			m_entitys.add(AABB);
 		}
 	}*/
+
+	m_gui = std::make_shared<HUD>(m_player->getEntity());
 	
 	camera->setPlayer(m_player);
 	m_magic.setPlayer(m_player->getEntity());
@@ -224,16 +241,13 @@ Scene::Scene() {
 
 	// Back faces culling
 	glCullFace(GL_BACK);
-
-	//m_time = 0;
-	std::cout << std::endl;
 }
 
 Scene::~Scene() {
 	glDeleteVertexArrays(1, &m_vertex_array_id);
 }
 
-void Scene::run() {
+bool Scene::run(bool pause) {
 	std::vector<EntityPtr>& entitys = m_entitys.getEntitys();
 
 	m_magic.run(entitys);
@@ -241,6 +255,7 @@ void Scene::run() {
 	m_motion.run(entitys);
 	m_interaction.run(entitys);
 	
+	m_physic.setPauseState(pause);
 	m_physic.run(entitys);
 
 	m_collider.run(entitys);
@@ -249,4 +264,13 @@ void Scene::run() {
 	camera->update();
 
 	m_renderer.run(entitys);
+	m_gui->draw();
+
+	return isPlayerDead();
+}
+
+bool Scene::isPlayerDead() const {
+	EntityPtr entity = m_player->getEntity();
+	KillablePtr life = entity->getComponent<Killable>();
+	return (life->m_life <= 0.f);
 }

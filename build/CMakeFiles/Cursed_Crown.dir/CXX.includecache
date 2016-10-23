@@ -150,6 +150,8 @@ glm/gtc/type_ptr.hpp
 
 /home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
 
+/home/matthieu/Programmation/Distorted-Dungeon/include/Config.hpp
+
 /home/matthieu/Programmation/Distorted-Dungeon/include/CubeRenderable.hpp
 vector
 -
@@ -219,6 +221,30 @@ iostream
 -
 ../include/Entity.h
 /home/matthieu/Programmation/Distorted-Dungeon/include/Entity.h
+
+/home/matthieu/Programmation/Distorted-Dungeon/include/HUD.hpp
+vector
+-
+memory
+-
+set
+-
+ft2build.h
+-
+../include/System.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/System.h
+../include/Entity.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/Entity.h
+../include/Component.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
+../include/Config.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/Config.hpp
+../include/renderable.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/renderable.hpp
+../include/Camera.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/Camera.hpp
+../include/RenderableText.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/RenderableText.hpp
 
 /home/matthieu/Programmation/Distorted-Dungeon/include/Light.hpp
 vector
@@ -406,6 +432,28 @@ glm/gtc/matrix_transform.hpp
 ../include/renderable.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/renderable.hpp
 
+/home/matthieu/Programmation/Distorted-Dungeon/include/RenderableText.hpp
+vector
+-
+memory
+-
+set
+-
+ft2build.h
+-
+../include/System.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/System.h
+../include/Entity.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/Entity.h
+../include/Component.h
+/home/matthieu/Programmation/Distorted-Dungeon/include/Component.h
+../include/Config.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/Config.hpp
+../include/renderable.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/renderable.hpp
+../include/Camera.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/Camera.hpp
+
 /home/matthieu/Programmation/Distorted-Dungeon/include/Resource.hpp
 map
 -
@@ -451,6 +499,8 @@ glm/gtc/type_ptr.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/AI.hpp
 ../include/Carryable.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/Carryable.hpp
+../include/HUD.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/HUD.hpp
 
 /home/matthieu/Programmation/Distorted-Dungeon/include/ShaderProgram.hpp
 string
@@ -711,6 +761,8 @@ glm/gtc/type_ptr.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/Light.hpp
 ../include/Player.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/Player.hpp
+../include/HUD.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/HUD.hpp
 
 /home/matthieu/Programmation/Distorted-Dungeon/src/ShaderProgram.cpp
 algorithm
@@ -745,10 +797,18 @@ SDL2/SDL.h
 /home/matthieu/Programmation/Distorted-Dungeon/include/Scene.hpp
 ../include/Resource.hpp
 /home/matthieu/Programmation/Distorted-Dungeon/include/Resource.hpp
+../include/Config.hpp
+/home/matthieu/Programmation/Distorted-Dungeon/include/Config.hpp
 glm/gtc/matrix_transform.hpp
 -
 glm/gtc/matrix_access.hpp
 -
 glm/gtx/rotate_vector.hpp
+-
+
+/usr/include/freetype2/config/ftheader.h
+
+/usr/include/freetype2/ft2build.h
+config/ftheader.h
 -
 

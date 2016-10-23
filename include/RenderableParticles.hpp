@@ -40,10 +40,12 @@ class ParticleSystem {
 		ParticleSystem(const RenderablePtr<ParticleSystem<Type>> render_system,
 					const glm::vec3& position,
 				   	const glm::vec2& size,
+				   	const glm::vec4& color,
 					unsigned int num_particles,
 					GLuint textureID) : m_render_system(render_system),
 												  m_position(position),
 												  m_size(size),
+												  m_color(color),
 												  m_textureID(textureID) {
 			for(unsigned int i = 0; i < num_particles; ++i) {
 				createNewParticle();
@@ -87,6 +89,7 @@ class ParticleSystem {
 			RenderablePtr<Particle<Type>> render_particle = std::make_shared<Renderable<Particle<Type>>>(m_render_system->getShaderProgram(),
 																										 m_particles.back(),
 																										 m_size,
+																										 m_color,
 																										 m_textureID);
 			render_particle->setParent(m_render_system);
 
@@ -115,6 +118,7 @@ class ParticleSystem {
 
 		glm::vec3 										m_position;
 		glm::vec2										m_size;
+		glm::vec4										m_color;
 
 		GLuint											m_textureID;
 };
@@ -126,7 +130,9 @@ template<typename Type>
 class Renderable<ParticleSystem<Type>> : public Drawable, public std::enable_shared_from_this< Renderable< ParticleSystem<Type> > > {
 	public:
 		Renderable(const ShaderProgramPtr shader,
-				   const std::string& key_texture) : Drawable(shader) {
+				   const std::string& key_texture,
+				   const glm::vec4& color) : Drawable(shader),
+				   							 m_color(color) {
 			m_time_prec = SDL_GetTicks();
 			m_textureID = CreateBufferTexture(key_texture);
 		}
@@ -139,6 +145,7 @@ class Renderable<ParticleSystem<Type>> : public Drawable, public std::enable_sha
 			m_particle_system = std::make_shared<ParticleSystem<Type>>(this->shared_from_this(),
 														position,
 														size,
+														m_color,
 														num_particles,
 														m_textureID);
 		}
@@ -159,6 +166,7 @@ class Renderable<ParticleSystem<Type>> : public Drawable, public std::enable_sha
 		unsigned int 									m_time_prec;
 
 		GLuint											m_textureID;
+		glm::vec4										m_color;
 };
 
 template<typename Type>
@@ -167,9 +175,11 @@ class Renderable<Particle<Type>> : public Drawable {
 		Renderable(const ShaderProgramPtr shader,
 				   const ParticlePtr<Type> particle,
 				   const glm::vec2& size,
+				   const glm::vec4& color,
 				   GLuint textureID) : Drawable(shader),
 				   							m_particle(particle),
 				   							m_size(size),
+				   							m_color(color),
 				   							m_textureID(textureID) {
 			Plane::initialize(m_positions,
 							m_normals,
@@ -234,6 +244,9 @@ class Renderable<Particle<Type>> : public Drawable {
 			int sizeLocation = m_shader->getUniformLocation("size");
 			glUniform2fv(sizeLocation, 1, glm::value_ptr(m_size));
 
+			int colorLocation = m_shader->getUniformLocation("color_particle");
+			glUniform4fv(colorLocation, 1, glm::value_ptr(m_color));
+
 			int timeLocation = m_shader->getUniformLocation("time");
 			glUniform1i(timeLocation, SDL_GetTicks());
 
@@ -276,6 +289,7 @@ class Renderable<Particle<Type>> : public Drawable {
 		std::vector<glm::vec3>		m_normals;
 
 		glm::vec2					m_size;
+		glm::vec4					m_color;
 
 		GLuint						m_textureID;
 		GLuint 						m_vertex_buffer_texcoords_id;

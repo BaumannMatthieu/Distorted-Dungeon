@@ -94,32 +94,49 @@ Player::Player(const DungeonPtr dungeon, EntityManager& entity_manager) {
 	render_weapon->m_renderable = axe_mesh;
 
 	//glm::vec3 unitWorld(SIZE_TILE, SIZE_TILE, SIZE_TILE);
-	axe_mesh->scaleHeritanceMatrix(glm::vec3(0.02f));
+	axe_mesh->scaleHeritanceMatrix(glm::vec3(0.05f));
 	//axe_mesh->rotateLocalMatrix(90.f, glm::vec3(0.0f, 0.0f, -1.0f));
 	axe_mesh->rotateHeritanceMatrix(180.f, glm::vec3(0.0f, 1.0f, 0.0f));
 	axe_mesh->translateHeritanceMatrix(glm::vec3(0.0f, 0.05f, 0.1f));
-
+	//axe_mesh->translateHeritanceMatrix(glm::vec3(0.f, 0.f, 0.f));
 	weapon->addComponent<RenderableComponent>(render_weapon);
 	axe_mesh->setParent(goblin_mesh);
+	
+	/*MovablePtr movable_axe = std::make_shared<Movable>();
+	movable_axe->m_position = movable->m_position + glm::vec3(0.0f, 0.05f, 0.1f);
+	movable_axe->m_speed = 0.f;
+	movable_axe->m_quat = glm::quat(1.f, 0.f, 0.f, 0.f);
+	weapon->addComponent<Movable>(movable_axe);*/
+
+	CollisablePtr<Cobble> col = std::make_shared<Collisable<Cobble>>();
+	col->m_size = getSizePositions(axe_mesh, 0.05f);
+	col->m_position = movable->m_position + glm::vec3(0.0f, 0.05f, 0.1f) - glm::vec3(1.f, 0.f, 1.f)*col->m_size/2.f;
+	col->m_box = std::make_shared<Renderable<Box>>(shaders.get("wireframe"),
+														  col->m_position,
+														  col->m_size,
+														  glm::vec4(1.f, 1.f, 1.f, 1.f));
+	weapon->addComponent<Collisable<Cobble>>(col);
+
+	//weapon->addComponent<Collisable<Cobble>>(collisable);
+
 
 	//System<Collider>::attachBoundingBoxCollision(weapon, m_entity);
 
 	//CollisablePtr<Cobble> collisable_weapon = weapon->getComponent<Collisable<Cobble>>();
 	//collisable_weapon->m_box->setParent(collisable->m_box);
 
-
-
-	/*MovablePtr movable_axe = std::make_shared<Movable>();
-	//movable_axe->m_position = glm::vec3(rooms[index].getCenter().x, 10.73f, rooms[index].getCenter().z);
-	movable_axe->m_speed = 0.f;
-	movable_axe->m_quat = glm::quat(1.f, 0.f, 0.f, 0.f);
-	weapon->addComponent<Movable>(movable_axe);*/
+	
 
 	ContainerPtr container = std::make_shared<Container>();
 	container->m_max_weight = 100;
 	container->m_max_armory = 5;
 	container->m_entitys.push_back(weapon);
 	m_entity->addComponent<Container>(container);
+
+	KillablePtr life = std::make_shared<Killable>();
+	life->m_defense = 0.f;
+	life->m_life = 100.f;
+	m_entity->addComponent<Killable>(life);
 
 	//entity_manager.add(weapon);
 	entity_manager.add(m_entity);

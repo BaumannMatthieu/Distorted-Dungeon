@@ -104,6 +104,12 @@ class PhysicManager {
 			m_player = player;
 		}
 
+		void setPauseState(bool pause) {
+			if(pause) {
+				m_time = SDL_GetTicks();
+			}
+		}
+
 	private:
 		unsigned int		m_time;
 

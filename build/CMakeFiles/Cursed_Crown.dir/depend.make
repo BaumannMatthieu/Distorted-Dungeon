@@ -105,9 +105,11 @@ CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/CollidedSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/ColliderSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/CollisableComponent.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Component.h
+CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Config.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Dunjeon.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Entity.h
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/EntityManager.h
+CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/HUD.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Light.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/LineRenderable.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/MagicSystem.hpp
@@ -122,12 +124,15 @@ CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Position.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/RenderSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/RenderableComponent.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/RenderableParticles.hpp
+CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/RenderableText.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Resource.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/Scene.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/System.h
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../include/renderable.hpp
 CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: ../src/Scene.cpp
+CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: /usr/include/freetype2/config/ftheader.h
+CMakeFiles/Cursed_Crown.dir/src/Scene.cpp.o: /usr/include/freetype2/ft2build.h
 
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o: ../src/./../include/ShaderProgram.hpp
 CMakeFiles/Cursed_Crown.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
@@ -140,9 +145,11 @@ CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/CollidedSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/ColliderSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/CollisableComponent.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Component.h
+CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Config.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Dunjeon.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Entity.h
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/EntityManager.h
+CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/HUD.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Light.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/LineRenderable.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/MagicSystem.hpp
@@ -157,10 +164,13 @@ CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Position.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/RenderSystem.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/RenderableComponent.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/RenderableParticles.hpp
+CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/RenderableText.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Resource.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/Scene.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/System.h
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../include/renderable.hpp
 CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: ../src/main.cpp
+CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: /usr/include/freetype2/config/ftheader.h
+CMakeFiles/Cursed_Crown.dir/src/main.cpp.o: /usr/include/freetype2/ft2build.h
 

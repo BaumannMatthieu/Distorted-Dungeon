@@ -58,14 +58,12 @@ struct Effect {
 	std::function<void (EffectPtr, EntityPtr)>			m_script;
 };
 
-
-
 struct Speed : public Effect {
 	float							m_speed_factor;
 };
 
 struct Damage : public Effect {
-	unsigned int 					m_damage;
+	float 					m_damage;
 };
 
 using DamagePtr = std::shared_ptr<Damage>;

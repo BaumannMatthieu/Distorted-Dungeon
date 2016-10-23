@@ -35,7 +35,7 @@ public:
 			if(distance_norme < 5.f && distance_norme >= 0.5f) {
 				movable_ai->m_direction = distance;
 				glm::normalize(movable_ai->m_direction);
-				movable_ai->m_speed = 1.5f;
+				movable_ai->m_speed = 0.5f;
 			}
 		}
 	}

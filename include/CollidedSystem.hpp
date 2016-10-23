@@ -26,97 +26,20 @@ class Collided {
 					
 					if(collided != nullptr) {
 						for(auto& opponent : collided->m_entitys) {
-							// If the opponent is a fixed world object then we just block the entity 
-							//if(opponent->getComponent<Movable>() == nullptr) {
-								CarriedPtr carried = opponent->getComponent<Carried>();
-								if(carried != nullptr) {
-									// If the carried entity is in collision with its owner then we do not manage the collision
-									if(carried->m_entity == entity) {
-										continue;
-									}
+							CarriedPtr carried = opponent->getComponent<Carried>();
+							if(carried != nullptr) {
+								// If the carried entity is in collision with its owner then we do not manage the collision
+								if(carried->m_entity == entity) {
+									continue;
 								}
+							}
 
-								MovablePtr movable = entity->getComponent<Movable>();
+							CollisablePtr<Cobble> box_opponent = opponent->getComponent<Collisable<Cobble>>();
+							CollisablePtr<Cobble> box_entity = entity->getComponent<Collisable<Cobble>>();
 
-								CollisablePtr<Cobble> box_opponent = opponent->getComponent<Collisable<Cobble>>();
-								CollisablePtr<Cobble> box_entity = entity->getComponent<Collisable<Cobble>>();
-
-								if(box_opponent != nullptr && box_entity != nullptr) {
-									TriggerablePtr throwable_entity = entity->getComponent<Triggerable>();
-									TriggerablePtr throwable_opponent = opponent->getComponent<Triggerable>();
-									if(throwable_entity != nullptr && std::find(damaged.begin(), damaged.end(), opponent) == damaged.end()) {
-										if(opponent != throwable_entity->m_thrower) {
-											KillablePtr opponent_life = opponent->getComponent<Killable>();
-
-											if(opponent_life != nullptr) {
-												//std::cout << "damage !" << std::endl;
-												EffectCollidedPtr effect = entity->getComponent<EffectCollided>();
-												effectCollided(effect, opponent);
-												damaged.push_back(opponent);
-											}
-											erase.push_back(entity);
-										}
-									} else if(throwable_opponent != nullptr && std::find(damaged.begin(), damaged.end(), entity) == damaged.end()) {
-										if(entity != throwable_opponent->m_thrower) {
-											KillablePtr entity_life = entity->getComponent<Killable>();
-
-											if(entity_life != nullptr) {
-												//std::cout << "damage !" << std::endl;
-												EffectCollidedPtr effect = opponent->getComponent<EffectCollided>();
-												effectCollided(effect, entity);
-												damaged.push_back(entity);
-											}
-											erase.push_back(opponent);
-										}
-									} else {
-										glm::vec3 overlap = getOverlapVector(box_opponent, box_entity);
-										//glm::vec3 delta = glm::vec3(overlap.x, 0.f, overlap.z);
-										glm::vec3 delta = glm::vec3(overlap.x, 0.f, 0.f);
-										if(overlap.z < overlap.x) {
-											delta = glm::vec3(0.f, 0.f, overlap.z);
-										}
-										if(overlap.y < overlap.x && overlap.y < overlap.z) {
-											delta = glm::vec3(0.f, overlap.y, 0.f);
-
-											PhysicPtr physic = entity->getComponent<Physic>();
-											if(physic != nullptr) {
-												physic->m_jump = false;
-											}
-										}
-										
-										if(box_entity->m_position.x <= box_opponent->m_position.x) {
-											delta.x *= -1.f; 
-										} 
-										if(box_entity->m_position.y <= box_opponent->m_position.y) {
-											delta.y *= -1.f; 
-										} 
-										if(box_entity->m_position.z <= box_opponent->m_position.z) {
-											delta.z *= -1.f; 
-										}
-
-										movable->m_position += delta;
-										box_entity->m_position += delta;
-
-										PhysicPtr physic = entity->getComponent<Physic>();
-										if(physic != nullptr && physic->m_gravity > 0.f && delta.y > 0.f) {
-											physic->m_gravity = 0.f;
-										}
-
-										box_entity->m_box->translateLocalMatrix(delta);
-										movable->m_heritance = glm::translate(movable->m_heritance, delta*glm::vec3(SIZE_TILE));
-
-										RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
-										if(renderable != nullptr) {
-											renderable->m_renderable->setHeritanceMatrix(movable->m_heritance * glm::toMat4(movable->m_quat));
-										}
-									}
-
-									MotionPtr<LineUpDown> motion = entity->getComponent<Motion<LineUpDown>>();
-									if(motion != nullptr) {
-										motion->m_first_to_second = not motion->m_first_to_second;
-									}
-								}
-							//}
+							if(box_opponent != nullptr && box_entity != nullptr) {
+								handleBoxBoxCollision(erase, damaged, entity, opponent);
+							}
 
 							//collided->m_entitys.erase(opponent);
 							CollidedPtr collided_opponent = opponent->getComponent<CollidedComponent>();
@@ -146,6 +69,94 @@ class Collided {
 	        		entitys.erase(it);
 	        	}
 	        }
+		}
+
+		void handleBoxBoxCollision(std::vector<EntityPtr>& erase,
+								   std::vector<EntityPtr>& damaged,
+								   const EntityPtr entity,
+								   const EntityPtr opponent) {
+			TriggerablePtr throwable_entity = entity->getComponent<Triggerable>();
+			TriggerablePtr throwable_opponent = opponent->getComponent<Triggerable>();
+			if(throwable_entity != nullptr && throwable_opponent != nullptr) {
+				return;
+			}
+
+			if(throwable_entity != nullptr && std::find(damaged.begin(), damaged.end(), opponent) == damaged.end()) {
+				if(opponent != throwable_entity->m_thrower) {
+					KillablePtr opponent_life = opponent->getComponent<Killable>();
+
+					if(opponent_life != nullptr) {
+						//std::cout << "damage !" << std::endl;
+						EffectCollidedPtr effect = entity->getComponent<EffectCollided>();
+						effectCollided(effect, opponent);
+						damaged.push_back(opponent);
+					}
+					erase.push_back(entity);
+				}
+			} else if(throwable_opponent != nullptr && std::find(damaged.begin(), damaged.end(), entity) == damaged.end()) {
+				if(entity != throwable_opponent->m_thrower) {
+					KillablePtr entity_life = entity->getComponent<Killable>();
+
+					if(entity_life != nullptr) {
+						//std::cout << "damage !" << std::endl;
+						EffectCollidedPtr effect = opponent->getComponent<EffectCollided>();
+						effectCollided(effect, entity);
+						damaged.push_back(entity);
+					}
+					erase.push_back(opponent);
+				}
+			} else {
+				CollisablePtr<Cobble> box_opponent = opponent->getComponent<Collisable<Cobble>>();
+				CollisablePtr<Cobble> box_entity = entity->getComponent<Collisable<Cobble>>();
+
+				glm::vec3 overlap = getOverlapVector(box_opponent, box_entity);
+				//glm::vec3 delta = glm::vec3(overlap.x, 0.f, overlap.z);
+				glm::vec3 delta = glm::vec3(overlap.x, 0.f, 0.f);
+				if(overlap.z < overlap.x) {
+					delta = glm::vec3(0.f, 0.f, overlap.z);
+				}
+				if(overlap.y < overlap.x && overlap.y < overlap.z) {
+					delta = glm::vec3(0.f, overlap.y, 0.f);
+
+					PhysicPtr physic = entity->getComponent<Physic>();
+					if(physic != nullptr) {
+						physic->m_jump = false;
+					}
+				}
+				
+				if(box_entity->m_position.x <= box_opponent->m_position.x) {
+					delta.x *= -1.f; 
+				} 
+				if(box_entity->m_position.y <= box_opponent->m_position.y) {
+					delta.y *= -1.f; 
+				} 
+				if(box_entity->m_position.z <= box_opponent->m_position.z) {
+					delta.z *= -1.f; 
+				}
+
+				MovablePtr movable = entity->getComponent<Movable>();
+
+				movable->m_position += delta;
+				box_entity->m_position += delta;
+
+				PhysicPtr physic = entity->getComponent<Physic>();
+				if(physic != nullptr && physic->m_gravity > 0.f && delta.y > 0.f) {
+					physic->m_gravity = 0.f;
+				}
+
+				box_entity->m_box->translateLocalMatrix(delta);
+				movable->m_heritance = glm::translate(movable->m_heritance, delta*glm::vec3(SIZE_TILE));
+
+				RenderableComponentPtr renderable = entity->getComponent<RenderableComponent>();
+				if(renderable != nullptr) {
+					renderable->m_renderable->setHeritanceMatrix(movable->m_heritance * glm::toMat4(movable->m_quat));
+				}
+			}
+
+			MotionPtr<LineUpDown> motion = entity->getComponent<Motion<LineUpDown>>();
+			if(motion != nullptr) {
+				motion->m_first_to_second = not motion->m_first_to_second;
+			}					
 		}
 
 		void effectCollided(const EffectCollidedPtr effects, EntityPtr opponent) {

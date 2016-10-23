@@ -15,6 +15,26 @@
 
 #include <glm/gtx/vector_angle.hpp>
 
+/*using Damage = struct Damage;
+using DamagePtr = std::shared_ptr<Damage>;
+
+struct Spell : public Component {
+	unsigned int	m_cost;
+
+	unsigned int	m_cooldown;
+	unsigned int	m_duration;
+};
+
+using Spell = struct Spell;
+using SpellPtr = std::shared_ptr<Spell>;
+
+struct Dot : public Component {
+	unsigned int	m_interval_time;
+};
+
+using Dot = struct Dot;
+using DotPtr = std::shared_ptr<Dot>;*/
+
 struct Caster : public Component {
 	unsigned int				m_mana;
 	unsigned int 				m_stamina;
@@ -43,31 +63,11 @@ using TriggerablePtr = std::shared_ptr<Triggerable>;
 class Magic {
 	public:
 		void run(std::vector<EntityPtr>& entitys) {	
-			std::vector<EntityPtr> casters = EntityManager::getEntitysByComponent<Caster>(entitys);
+			//std::vector<EntityPtr> casters = EntityManager::getEntitysByComponent<Caster>(entitys);
 
-			for(auto& entity : casters) {
+			for(auto& entity : entitys) {
 	           	if(entity == m_player) {
 	           		actionPlayer(entitys);
-	           	} else {
-					CasterPtr caster = entity->getComponent<Caster>();
-
-					unsigned int technic_selected_id = caster->m_selected_technic;
-					EntityPtr entity_triggerable = entity->getComponent<Caster>()->m_entitys[technic_selected_id];
-					TriggerablePtr triggerable = entity_triggerable->getComponent<Triggerable>();
-
-					if(triggerable->m_cooldown + caster->m_last_time[technic_selected_id] <= SDL_GetTicks()) {
-						MovablePtr movable_enemy = m_player->getComponent<Movable>();
-						MovablePtr movable = entity->getComponent<Movable>();
-
-						// Launch the spell
-						//createFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z));
-						glm::vec3 direction = movable_enemy->m_position - movable->m_position;
-						direction = glm::normalize(direction);
-
-						createCircleFireBowl(entitys, entity, direction, 3.f, 10.f, glm::vec4(0.f, 1.f, 0.f, 1.f), 1);
-
-						caster->m_last_time[technic_selected_id] = SDL_GetTicks();
-					}
 	           	}
 	        }
 		}
@@ -88,25 +88,17 @@ class Magic {
 				const Uint8 *keystate = SDL_GetKeyboardState(NULL);
 
 				if(keystate[SDL_SCANCODE_SPACE]) {
+					std::cout << "FIREBOWL ! " << std::endl;
 					// Launch the spell
 					//createFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z));
-					createCircleFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z),
-										 5.f,
-										 20.f,
-										 glm::vec4(1.f, 0.f, 0.f, 1.f),
-										 1);
+					createCircleFireBowl(entitys, m_player, glm::vec3(camera->getDirection().x, 0.f, camera->getDirection().z), 5);
 
 					caster->m_last_time[technic_selected_id] = SDL_GetTicks();
 				}
 			}
 		};
 
-		static void createFireBowl(std::vector<EntityPtr>& entitys,
-							const EntityPtr& triggerer,
-							const glm::vec3& direction,
-							float speed,
-							float damage,
-							const glm::vec4& color) {
+		static void createFireBowl(std::vector<EntityPtr>& entitys, const EntityPtr& triggerer, const glm::vec3& direction) {
 			EntityPtr firebowl = std::make_shared<Entity>();
 									
 			TriggerablePtr caract = std::make_shared<Triggerable>();
@@ -120,21 +112,14 @@ class Magic {
 			MovablePtr movable = std::make_shared<Movable>();
 			movable->m_direction = direction;
 			movable->m_position = triggerer->getComponent<Movable>()->m_position;
-			movable->m_speed = speed;
-
+			movable->m_speed = 5.f;
 			firebowl->addComponent<Movable>(movable);
 
 			DamagePtr direct_damage = std::make_shared<Damage>();
-			direct_damage->m_damage = damage;
-
-			direct_damage->m_script = [](EffectPtr effet, EntityPtr opponent) {
+			direct_damage->m_damage = 20;
+			direct_damage->m_script = [&direct_damage](EntityPtr opponent) {
 				KillablePtr status = opponent->getComponent<Killable>();
-				DamagePtr direct_damage = std::static_pointer_cast<Damage>(effet);
-				float damage = (direct_damage->m_damage - status->m_defense);
-
-				if(damage > 0.f) {
-					status->m_life -= damage;
-				}
+				status->m_life -= direct_damage->m_damage;
 			};
 
 			EffectCollidedPtr effect = std::make_shared<EffectCollided>();
@@ -156,7 +141,7 @@ class Magic {
 																  color_box);
 			firebowl->addComponent<Collisable<Cobble>>(collisable);
 
-			RenderablePtr<ParticleSystem<Fire>> firebowl_particle_system = std::make_shared<Renderable<ParticleSystem<Fire>>>(shaders.get("fire"), "smoke", color);
+			RenderablePtr<ParticleSystem<Fire>> firebowl_particle_system = std::make_shared<Renderable<ParticleSystem<Fire>>>(shaders.get("fire"), "smoke");
 			firebowl_particle_system->bindParticleSystem(movable->m_position, glm::vec2(0.1f));
 
 			RenderableComponentPtr renderable_component = std::make_shared<RenderableComponent>();
@@ -166,7 +151,7 @@ class Magic {
 			LightPtr<Ponctual> light = std::make_shared<Light<Ponctual>>();
 			light->m_position = glm::vec3(movable->m_position);
 			
-			light->m_ambiant = glm::vec3(color)/2.f;
+			light->m_ambiant = glm::vec3(0.5f, 0.f, 0.f);
 			light->m_diffuse = glm::vec3(1.0f, 1.0f, 1.f);
 			light->m_specular = glm::vec3(1.0f, 1.0f, 1.f);
 
@@ -181,9 +166,6 @@ class Magic {
 		static void createCircleFireBowl(std::vector<EntityPtr>& entitys,
 										 const EntityPtr& triggerer,
 										 glm::vec3 direction_entity,
-										 float speed,
-										 float damage,
-										 const glm::vec4& color,
 										 unsigned int num_firebowl) {
 			float dtheta = 2*3.14f/num_firebowl; 
 
@@ -200,7 +182,7 @@ class Magic {
 
 			for(unsigned int i = 0; i < num_firebowl; ++i) {
 				glm::vec3 direction(glm::cos(dtheta*i + phi), 0.f, glm::sin(dtheta*i + phi));
-				createFireBowl(entitys, triggerer, direction, speed, damage, color);
+				createFireBowl(entitys, triggerer, direction);
 			}
 		}
 
